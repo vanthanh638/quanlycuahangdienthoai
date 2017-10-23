@@ -5,20 +5,18 @@ public class SanPham {
 	private int id;
 	private String tensanpham;
 	private String hinhanh;
-	private String danhsachhinhanh;
-//	private DienThoai dienthoai;
 	private int luotxem;
 	private int soluongdaban;
 	private int gia;
 	private int soluongconlai;
 
-	public SanPham(int id, String tensanpham, String hinhanh, String danhsachhinhanh, int luotxem,
+	public SanPham(int id, String tensanpham, String hinhanh, int luotxem,
 			int soluongdaban, int gia, int soluongconlai) {
 		super();
 		this.id = id;
 		this.tensanpham = tensanpham;
 		this.hinhanh = hinhanh;
-		this.danhsachhinhanh = danhsachhinhanh;
+//		this.danhsachhinhanh = danhsachhinhanh;
 //		this.dienthoai = dienthoai;
 		this.luotxem = luotxem;
 		this.soluongdaban = soluongdaban;
@@ -54,22 +52,6 @@ public class SanPham {
 	public void setHinhanh(String hinhanh) {
 		this.hinhanh = hinhanh;
 	}
-
-	public String getDanhsachhinhanh() {
-		return danhsachhinhanh;
-	}
-
-	public void setDanhsachhinhanh(String danhsachhinhanh) {
-		this.danhsachhinhanh = danhsachhinhanh;
-	}
-
-//	public DienThoai getDienthoai() {
-//		return dienthoai;
-//	}
-//
-//	public void setDienthoai(DienThoai dienthoai) {
-//		this.dienthoai = dienthoai;
-//	}
 
 	public int getLuotxem() {
 		return luotxem;
