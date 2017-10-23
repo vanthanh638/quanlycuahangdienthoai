@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/jsp/public/cat_mobile.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/public/index.jsp=UTF-8
+encoding//WebContent/WEB-INF/template.xml=UTF-8
+encoding//WebContent/WEB-INF/templates/public/template.jsp=UTF-8
+encoding//WebContent/templates/public/css/settings.css=UTF-8
+encoding//WebContent/templates/public/js/script.js=UTF-8
+encoding//src/controller/PublicIndexController.java=UTF-8
+encoding//src/entities/Contact.java=UTF-8
+encoding//src/entities/QuangCao.java=UTF-8
+encoding/<project>=UTF-8
