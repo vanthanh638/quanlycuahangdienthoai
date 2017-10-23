@@ -48,7 +48,7 @@ public class DienThoai {
 		this.quayphim = quayphim;
 		this.danhgia = danhgia;
 	}
-
+	
 	public int getId() {
 		return id;
 	}

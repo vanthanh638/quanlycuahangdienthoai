@@ -5,7 +5,6 @@ public class SanPham {
 	private int id;
 	private String tensanpham;
 	private String hinhanh;
-//	private String danhsachhinhanh;
 	private LoaiSanPham loaiSanPham;
 	private int luotxem;
 	private int soluongdaban;
@@ -23,7 +22,6 @@ public class SanPham {
 		this.id = id;
 		this.tensanpham = tensanpham;
 		this.hinhanh = hinhanh;
-//		this.danhsachhinhanh = danhsachhinhanh;
 		this.loaiSanPham = loaiSanPham;
 		this.luotxem = luotxem;
 		this.soluongdaban = soluongdaban;
@@ -55,13 +53,6 @@ public class SanPham {
 		this.hinhanh = hinhanh;
 	}
 
-//	public String getDanhsachhinhanh() {
-//		return danhsachhinhanh;
-//	}
-//
-//	public void setDanhsachhinhanh(String danhsachhinhanh) {
-//		this.danhsachhinhanh = danhsachhinhanh;
-//	}
 
 	public LoaiSanPham getLoaiSanPham() {
 		return loaiSanPham;

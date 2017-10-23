@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import dao.DienThoaiDao;
+import dao.PhuKienDao;
 import defines.Defines;
 import utils.FormatNumber;
 import utils.SlugUtils;
@@ -26,9 +27,13 @@ public class PublicIndexController {
 	private FormatNumber formatNumber;
 
 	private DienThoaiDao dienThoaiDao;
+//	private SlideDao slideDao;
+	private PhuKienDao phuKienDao;
 	
 	public PublicIndexController() {
 		dienThoaiDao = new DienThoaiDao();
+//		slideDao = new SlideDao();
+		phuKienDao = new PhuKienDao();
 	}
 	
 	@ModelAttribute
@@ -41,6 +46,8 @@ public class PublicIndexController {
 	@RequestMapping(value="")
 	public String index(ModelMap modelMap){
 		modelMap.addAttribute("listDienThoai", dienThoaiDao.getItems());
+//		modelMap.addAttribute("listSlide", slideDao.getItems());
+		modelMap.addAttribute("listPK", phuKienDao.getItems());
 		return "public.public.index";
 	}
 	
