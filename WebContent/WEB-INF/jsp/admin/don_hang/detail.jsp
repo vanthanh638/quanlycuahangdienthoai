@@ -34,30 +34,30 @@
 												<th>Số lượng</th>
 												<th>Thành tiền</th>
 											</tr> 
-											<c:forEach items="${listProduct}" var="objProduct">
+											<c:forEach items="${donhang.chiTietDonHangs}" var="chithiet">
 												<tr>
 													<td>
-														${objProduct.san_pham}
+														${chithiet.sanpham.tensanpham}
 													</td>
 													
 													<td>
-														<img alt="" src="${pageContext.request.contextPath}/files/${objProduct.picture}"> 
+														<img alt="" src="${pageContext.request.contextPath}/files/${chitiet.sanpham.hinhanh}"> 
 													</td>
 													<td>
-														${objProduct.gia}
+														${chithiet.soluong}
 													</td>
 													<td>
-														${objProduct.so_luong}
+														${chithiet.gia}
 													</td>
 													<td>
-														${objProduct.gia * objProduct.so_luong}
+														${chithiet.soluong * chithiet.gia}
 													</td>
 												</tr>
 											</c:forEach>
 										</table>
 										<div class="col-lg-3 col-md-3 col-sm-3">
 											<div class="add-green">
-												<a href="${pageContext.request.contextPath}/admincp/don-hang/del/${id_dh}" onclick="return confirm('Bạn có muốn xóa...!')">
+												<a href="${pageContext.request.contextPath}/admin/don-hang/del/${donhang.id}" onclick="return confirm('Bạn có muốn xóa...!')">
 													Xóa đơn hàng
 												</a>
 											</div>

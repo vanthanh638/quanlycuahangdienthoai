@@ -5,30 +5,30 @@ public class SanPham {
 	private int id;
 	private String tensanpham;
 	private String hinhanh;
-	private String danhsachhinhanh;
-//	private DienThoai dienthoai;
+//	private String danhsachhinhanh;
+	private LoaiSanPham loaiSanPham;
 	private int luotxem;
 	private int soluongdaban;
 	private int gia;
 	private int soluongconlai;
-
-	public SanPham(int id, String tensanpham, String hinhanh, String danhsachhinhanh, int luotxem,
-			int soluongdaban, int gia, int soluongconlai) {
+	
+	public SanPham() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public SanPham(int id, String tensanpham, String hinhanh, LoaiSanPham loaiSanPham,
+			int luotxem, int soluongdaban, int gia, int soluongconlai) {
 		super();
 		this.id = id;
 		this.tensanpham = tensanpham;
 		this.hinhanh = hinhanh;
-		this.danhsachhinhanh = danhsachhinhanh;
-//		this.dienthoai = dienthoai;
+//		this.danhsachhinhanh = danhsachhinhanh;
+		this.loaiSanPham = loaiSanPham;
 		this.luotxem = luotxem;
 		this.soluongdaban = soluongdaban;
 		this.gia = gia;
 		this.soluongconlai = soluongconlai;
-	}
-
-	public SanPham() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getId() {
@@ -55,21 +55,21 @@ public class SanPham {
 		this.hinhanh = hinhanh;
 	}
 
-	public String getDanhsachhinhanh() {
-		return danhsachhinhanh;
-	}
-
-	public void setDanhsachhinhanh(String danhsachhinhanh) {
-		this.danhsachhinhanh = danhsachhinhanh;
-	}
-
-//	public DienThoai getDienthoai() {
-//		return dienthoai;
+//	public String getDanhsachhinhanh() {
+//		return danhsachhinhanh;
 //	}
 //
-//	public void setDienthoai(DienThoai dienthoai) {
-//		this.dienthoai = dienthoai;
+//	public void setDanhsachhinhanh(String danhsachhinhanh) {
+//		this.danhsachhinhanh = danhsachhinhanh;
 //	}
+
+	public LoaiSanPham getLoaiSanPham() {
+		return loaiSanPham;
+	}
+
+	public void setLoaiSanPham(LoaiSanPham loaiSanPham) {
+		this.loaiSanPham = loaiSanPham;
+	}
 
 	public int getLuotxem() {
 		return luotxem;

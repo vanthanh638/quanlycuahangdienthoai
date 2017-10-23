@@ -11,12 +11,12 @@
                             </div>
                             
                             <div class="page-content">
-                            	<form action="${pageContext.request.contextPath}/admincp/phu-kien/edit/${objPK.id_pk}" method="post" enctype="multipart/form-data">
+                            	<form action="${pageContext.request.contextPath}/admin/phu-kien/edit/${objPK.id}" method="post" enctype="multipart/form-data">
 	                            	<div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<form:errors path="objPK.name_pk" cssStyle="color:red"></form:errors>
+	                                    	<form:errors path="objPK.sanpham.tensanpham" cssStyle="color:red"></form:errors>
 	                                    </div>	
 	                                </div>
 	                            	<div class="row">
@@ -24,28 +24,31 @@
 	                                    	<p>Tên phụ kiện</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="name_pk" value="${objPK.name_pk}">
+	                                    	<input type="text" name="tensanpham" value="${objPK.sanpham.tensanpham}">
 	                                    </div>	
 	                                </div>
 	                                
 	                                <div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
-	                                    	<p>Loại phụ kiện</p>
+	                                    	<p>Loại sản phẩm</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<select name="id_loai_pk">
-	                                    		<c:forEach items="${listLoaiPK}" var="objLoaiPK">
-	                                    			<c:choose>
-	                                    				<c:when test="${objLoaiPK.id_loai_pk == objPK.id_loai_pk}">
-	                                    					<option selected="selected" value="${objLoaiPK.id_loai_pk}">${objLoaiPK.name_loai_pk}</option>
-	                                    				</c:when>
-	                                    				<c:otherwise>
-	                                    					<option value="${objLoaiPK.id_loai_pk}">${objLoaiPK.name_loai_pk}</option>
-	                                    				</c:otherwise>
-	                                    			</c:choose>
+	                                    	<select name="id_loaisp">
+	                                    		<c:forEach items="${listLSP}" var="lsp">
+	                                    			<c:if test="${lsp.id_cha != 0}">
+	                                    				<c:choose>
+		                                    				<c:when test="${lsp.id_loaisanpham == objPK.sanpham.loaiSanPham.id_loaisanpham}">
+		                                    					<option selected="selected" value="${lsp.id_loaisanpham}">${lsp.tenloai}</option>
+		                                    				</c:when>
+		                                    				<c:otherwise>
+		                                    					<option value="${lsp.id_loaisanpham}">${lsp.tenloai}</option>
+		                                    				</c:otherwise>
+		                                    			</c:choose>
+	                                    				<option value="${lsp.id_loaisanpham}">${lsp.tenloai}</option>
+	                                    			</c:if>
 	                                    		</c:forEach>
 	                                    	</select>
-	                                    </div>	
+	                                    </div>
 	                                </div>
 	                                
 	                                <div class="row">
@@ -53,36 +56,49 @@
 	                                    	<p>Hình ảnh</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="file" name="picture_add">
+	                                    	<input type="file" name="hinhanh_add">
 	                                    </div>	
 	                                </div>
 	                                
-	                                <div class="row">
-	                                    <div class="col-lg-3 col-md-3 col-sm-3">
-	                                    	<p>Hình ảnh cũ</p>
-	                                    </div>
-	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<img alt="" src="${pageContext.request.contextPath}/files/${objPK.picture}" width="150">
-	                                    </div>	
-	                                </div>
+	                                <c:if test="${objPK.sanpham.hinhanh != null}">
+	                                	<div class="row">
+		                                    <div class="col-lg-3 col-md-3 col-sm-3">
+		                                    	<p>Hình ảnh cũ</p>
+		                                    </div>
+		                                    <div class="col-lg-9 col-md-9 col-sm-9">
+		                                    	<img alt="" src="${pageContext.request.contextPath}/files/${objPK.sanpham.hinhanh}" width="150">
+		                                    </div>	
+		                                </div>
+	                                </c:if>
 	                                
 	                                <div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    	<p>Giá</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="gia" value="${objPK.gia}">
+	                                    	<input type="text" name="gia" value="${objPK.sanpham.gia}">
+	                                    </div>	
+	                                </div>
+	                                
+	                                <div class="row">
+	                                    <div class="col-lg-3 col-md-3 col-sm-3">
+	                                    	<p>Số lương</p>
+	                                    </div>
+	                                    <div class="col-lg-9 col-md-9 col-sm-9">
+	                                    	<input type="text" name="soluongconlai" value="${objPK.sanpham.soluongconlai}">
 	                                    </div>	
 	                                </div>
 	                            	
 	                                <div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
-	                                    	<p>Đánh giá</p>
+	                                    	<p>Mô tả</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<textarea name="danh_gia" class="danh_gia"> ${objPK.danh_gia}</textarea>
+	                                    	<textarea name="danhgia" class="danh_gia"> ${objPK.danhgia}</textarea>
 	                                    </div>	
 	                                </div>
+	                                
+	                                
 	                                
 	                                <div class="row">
 	                                    <div class="col-lg-12 col-md-12 col-sm-12">
@@ -100,7 +116,7 @@
                     
 				</section>
 <script type="text/javascript">
-	CKEDITOR.replace( 'danh_gia',
+	CKEDITOR.replace( 'danhgia',
 		{
 			filebrowserBrowseUrl : '/mobileShop/templates/public/ckfinder/ckfinder.html',
 			filebrowserImageBrowseUrl : '/mobileShop/templates/public/ckfinder/ckfinder.html?type=Images',

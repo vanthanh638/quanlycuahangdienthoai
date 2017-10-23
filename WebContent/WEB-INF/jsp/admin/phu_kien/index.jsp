@@ -55,34 +55,34 @@
                     	 </div>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                         	<div class="add-green">
-								<a href="${pageContext.request.contextPath}/admincp/phu-kien/add">
+								<a href="${pageContext.request.contextPath}/admin/phu-kien/add">
 									Thêm phụ kiện
 								</a>
 							</div>
 							<table class="order-table">
                             	
 								<tr>
-									<th>ID</th>
 									<th>Tên phụ kiện</th>
-									<th>Loại phụ kiện</th>
 									<th width="200">Hình ảnh</th>
 									<th>Giá</th>
+									<th>Số lượng</th>
+									<th>Dã bán</th>
 									<th>Chức năng</th>
 								</tr>
 								<c:forEach items="${listPK}" var="objPK">
 									<tr>
-										<td><p><a href="#">${objPK.id_pk}</a></p></td>
-										<td class="order-number"><p><a href="#">${objPK.name_pk}</a></p>
-										<td>${objPK.name_loai_pk}</td>
+										<td class="order-number"><p><a href="#">${objPK.sanpham.tensanpham}</a></p>
 										<td style="text-align: center">
-											<img src="${pageContext.request.contextPath}/files/${objPK.picture}" alt="" width="180">
+											<img src="${pageContext.request.contextPath}/files/${objPK.sanpham.hinhanh}" alt="" width="180">
 										</td>
-										<td>${objPK.gia}</td>
+										<td>${objPK.sanpham.gia}</td>
+										<td>${objPK.sanpham.soluongconlai}</td>
+										<td>${objPK.sanpham.soluongdaban}</td>
 										<td style="text-align: center">
 											<p>
-												<a href="${pageContext.request.contextPath}/admincp/phu-kien/edit/${objPK.id_pk}"><span class="price">Sửa</span></a>
+												<a href="${pageContext.request.contextPath}/admin/phu-kien/edit/${objPK.id}"><span class="price">Sửa</span></a>
 												||
-												<a href="${pageContext.request.contextPath}/admincp/phu-kien/del/${objPK.id_pk}" onclick="return confirm('Bạn có muốn xóa...?')"><span class="price">Xóa</span></a>
+												<a href="${pageContext.request.contextPath}/admin/phu-kien/del/${objPK.id}" onclick="return confirm('Bạn có muốn xóa...?')"><span class="price">Xóa</span></a>
 											</p>
 										</td>
 									</tr> 

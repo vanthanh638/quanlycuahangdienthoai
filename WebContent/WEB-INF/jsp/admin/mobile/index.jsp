@@ -75,8 +75,8 @@
 									<th>Tên điện thoại</th>
 									<th width="200">Hình ảnh</th>
 									<th>Giá</th>
+									<th>Số lượng</th>
 									<th>Đã bán</th>
-									<th>Số lượng còn</th>
 									<th>Chức năng</th>
 								</tr>
 								
@@ -88,8 +88,8 @@
 											<img src="${dienthoai.sanpham.hinhanh}" alt="" width="180">
 										</td>
 										<td>${dienthoai.sanpham.gia}</td>
-										<td>${dienthoai.sanpham.soluongdaban}</td>
 										<td>${dienthoai.sanpham.soluongconlai}</td>
+										<td>${dienthoai.sanpham.soluongdaban}</td>
 										<td style="text-align: center">
 											<p>
 												<a href="${pageContext.request.contextPath}/admin/mobile/edit/${dienthoai.id}"><span class="price">Sửa</span></a>

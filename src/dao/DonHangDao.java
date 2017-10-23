@@ -1,6 +1,8 @@
 package dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -11,84 +13,88 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 
-import entities.NguoiDung;
+import defines.Defines;
+import entities.DonHang;
 
-public class NguoiDungDao {
-	private String url = "http://192.168.1.3:8082/nguoidung";
+public class DonHangDao {
 
-	public List<NguoiDung> getItems() {
+	private static String url = Defines.url + "donhang";
+	
+	public List<DonHang> getItems() {
 		String uri = url;
-		List<NguoiDung> list = new ArrayList<>();
-
 		RestTemplate restTemplate = new RestTemplate();
-
+		
+		List<DonHang> list = new ArrayList<>();
+		
 		// Chuỗi json
 		String result = restTemplate.getForObject(uri, String.class);
-
+//		System.out.println(result);
 		try {
 			// 1. Tạo ra một JSONParser
 			JSONParser jsonParser = new JSONParser();
-
+			
 			// 2. Parser chuỗi JSON về một JSONArray
-			JSONArray jsonArray;
-			jsonArray = (JSONArray) jsonParser.parse(result);
+			JSONArray jsonArray = (JSONArray) jsonParser.parse(result);
+//			System.out.println(jsonArray.size());
 			
 			for (int i = 0; i < jsonArray.size(); i++) {
 				JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+			    
+//				String dateStr = jsonObject.get("ngaykhoitao").toString();
+//				System.out.println("Date String: " + dateStr);
+//				Date date = new Date();
+//				date.setTime(Long.parseLong(dateStr));
+//				jsonObject.put("ngaykhoitao", date);
+//				
+//				System.out.println("ngaykhoitao" + jsonObject.get("ngaykhoitao").toString());
 				
 				// Tạo đối tượng Gson
 			    Gson gson = new Gson();
-//			    
-			    // chuyển từ json sang đối tượng
-			    NguoiDung nguoiDung = gson.fromJson(jsonObject.toString(), NguoiDung.class);
 			    
-			    list.add(nguoiDung);
+			    // chuyển từ json sang đối tượng
+			    DonHang donHang = gson.fromJson(jsonObject.toString(), DonHang.class);
+			    
+			    list.add(donHang);
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
-
-	// get Item by id
-	public NguoiDung getItem(int id) {
-		System.out.println("ID: " + id);
+	
+	public DonHang getItem(int id) {
 		String uri = url + "/" + id;
 		RestTemplate restTemplate = new RestTemplate();
+		String jsonString = restTemplate.getForObject(uri, String.class);
 		
-		NguoiDung nguoiDung = null;
+		DonHang donHang = null;
 		
-		// Chuỗi json
-		String result = restTemplate.getForObject(uri, String.class);
-		
-		// Tạo đối tượng Gson
-	    Gson gson = new Gson();
-		nguoiDung = gson.fromJson(result, NguoiDung.class);
-		
-		return nguoiDung;
+		Gson gson = new Gson();
+		donHang = gson.fromJson(jsonString, DonHang.class);
+		return donHang;
 	}
 
 	// add
-	public NguoiDung addItem(NguoiDung nguoiDung) {
+	public DonHang addItem(DonHang donHang) {
 		String uri = url + "/add";
 		RestTemplate restTemplate = new RestTemplate();
-		NguoiDung result = restTemplate.postForObject(uri, nguoiDung, NguoiDung.class);
+		restTemplate = new RestTemplate();
+		DonHang result = restTemplate.postForObject(uri, donHang, DonHang.class);
 		return result;
 	}
 
 	// update
-	public NguoiDung editItem(NguoiDung nguoiDung) {
+	public DonHang editItem(DonHang donHang) {
 		String uri = url + "/update";
 		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.put(uri, nguoiDung);
-		return nguoiDung;
+		restTemplate.put(uri, donHang);
+		return donHang;
 	}
-
+		
 	public int delItem(int id) {
 		String uri = url + "/delete/" + id;
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.delete(uri);
 		return id;
 	}
-
 }

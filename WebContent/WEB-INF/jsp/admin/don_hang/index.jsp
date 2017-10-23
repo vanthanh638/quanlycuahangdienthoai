@@ -37,39 +37,39 @@
                                     <div id="tab1">
 										<table class="orderinfo-table">
 											<tr>
-												<th>ID </th>
 												<th>Họ tên</th>
 												<th>Địa chỉ</th>
+												<th>Điện thoại</th>
 												<th>Ngày tạo</th>
 												<th>HT thanh toán</th>
-												<th>Thông tin thêm</th>
+												<th>Trạng thái</th>
 												<th>Chi tiết</th>
 											</tr> 
 											<c:forEach items="${listDonHang}" var="objDonHang">
 												<tr>
 													<td>
-														${objDonHang.id_don_hang}
+														${objDonHang.hoten}
 													</td>
 													
 													<td>
-														${objDonHang.fullname}
+														${objDonHang.diachi}
 													</td>
 													<td>
-														${objDonHang.address}
+														${objDonHang.sodienthoai}
 													</td>
 													<td>
-														${objDonHang.date_creat}
+														${objDonHang.ngaykhoitao}
 													</td>
 													<td>
-														${objDonHang.hinh_thuc_tt}
+														${objDonHang.thanhToan.ten}
 													</td>
 													<td>
-														${objDonHang.tt_them}
+														${objDonHang.trangthai}
 													</td>
 													<td>
-														<a href="${pageContext.request.contextPath}/admincp/don-hang/chi-tiet-don-hang/${objDonHang.id_don_hang}"><span class="price big">Chi tiết</span></a>
+														<a href="${pageContext.request.contextPath}/admin/don-hang/chi-tiet-don-hang/${objDonHang.id}"><span class="price big">Chi tiết</span></a>
 														||
-														<a href="${pageContext.request.contextPath}/admincp/don-hang/del/${objDonHang.id_don_hang}" onclick="return confirm('Bạn có muốn xóa...!')"><span class="price">Xóa</span></a>
+														<a href="${pageContext.request.contextPath}/admin/don-hang/del/${objDonHang.id}" onclick="return confirm('Bạn có muốn xóa...!')"><span class="price">Xóa</span></a>
 													</td> 
 												</tr>
 											</c:forEach>
@@ -77,20 +77,20 @@
 										<div class="col-lg-12 col-md-6 col-sm-6">
 				                            <div class="pagination">
 				                            	<c:if test="${page>1}">
-				                            		<a href="${pageContext.request.contextPath}/admincp/don-hang?page=${page-1}"><div class="previous"><i class="icons icon-left-dir"></i></div></a>
+				                            		<a href="${pageContext.request.contextPath}/admin/don-hang?page=${page-1}"><div class="previous"><i class="icons icon-left-dir"></i></div></a>
 				                            	</c:if>
 				                            	<c:forEach var="i" begin="1" end="${sumPage}" >
 				                                	<c:choose>
 				                            			<c:when test="${page==i}">
-				                            				<a class="active-page" href="${pageContext.request.contextPath}/admincp/don-hang?page=${i}"><div class="page-button">${i}</div></a>
+				                            				<a class="active-page" href="${pageContext.request.contextPath}/admin/don-hang?page=${i}"><div class="page-button">${i}</div></a>
 				                            			</c:when>
 				                            			<c:otherwise>
-				                            			<a href="${pageContext.request.contextPath}/admincp/don-hang?page=${i}"><div class="page-button">${i}</div></a>
+				                            			<a href="${pageContext.request.contextPath}/admin/don-hang?page=${i}"><div class="page-button">${i}</div></a>
 				                            			</c:otherwise>
 				                            		</c:choose>
 				                                </c:forEach>
 				                                <c:if test="${page<sumPage}">
-				                           			<a href="${pageContext.request.contextPath}/admincp/don-hang?page=${page+1}"><div class="next"><i class="icons icon-right-dir"></i></div></a>
+				                           			<a href="${pageContext.request.contextPath}/admin/don-hang?page=${page+1}"><div class="next"><i class="icons icon-right-dir"></i></div></a>
 				                           		</c:if>
 			                           		 </div>
                                     	</div>

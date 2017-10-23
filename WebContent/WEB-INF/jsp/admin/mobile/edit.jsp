@@ -11,38 +11,31 @@
                             </div>
                             
                             <div class="page-content">
-                            	<form action="${pageContext.request.contextPath}/admincp/mobile/edit/${objMobile.id_mobile}" method="post" enctype="multipart/form-data">
-	                            	<div class="row">
-	                                    <div class="col-lg-3 col-md-3 col-sm-3">
-	                                    </div>
-	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<form:errors path="objMobile.name_mobile" cssStyle="color:red"></form:errors>
-	                                    </div>	
-	                                </div>
+                            	<form action="${pageContext.request.contextPath}/admin/mobile/edit/${dienthoai.id}" method="post" enctype="multipart/form-data">
 	                            	<div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    	<p>Tên điện thoại</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="name_mobile" value="${objMobile.name_mobile}">
+	                                    	<input type="text" name="tensanpham" value="${dienthoai.sanpham.tensanpham}">
 	                                    </div>	
 	                                </div>
 	                                
 	                                <div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
-	                                    	<p>Hãng sản xuất</p>
+	                                    	<p>Loại sản phẩm</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<select name="id_pro">
-	                                    		<c:forEach items="${listPro}" var="objPro">
-	                                    			<c:choose>
-	                                    				<c:when test="${objPro.id_pro==objMobile.id_pro}">
-	                                    					<option selected="selected" value="${objPro.id_pro}">${objPro.name_pro}</option>
-	                                    				</c:when>
-	                                    				<c:otherwise>
-	                                    					<option value="${objPro.id_pro}">${objPro.name_pro}</option>
-	                                    				</c:otherwise>
-	                                    			</c:choose>
+	                                    	<select name="id_loaisp">
+	                                    		<c:forEach items="${listLSP}" var="lsp">
+                                    				<c:choose>
+                                    					<c:when test="${dienthoai.sanpham.loaiSanPham.id_loaisanpham == lsp.id_loaisanpham}">
+                                    						<option selected="selected" value="${lsp.id_loaisanpham}">${lsp.tenloai}</option>
+                                    					</c:when>
+                                    					<c:otherwise>
+                                    						<option value="${lsp.id_loaisanpham}">${lsp.tenloai}</option>
+                                    					</c:otherwise>
+                                    				</c:choose>
 	                                    		</c:forEach>
 	                                    	</select>
 	                                    </div>	
@@ -53,16 +46,15 @@
 	                                    	<p>Hình ảnh</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="file" name="picture_add">
+	                                    	<input type="file" name="hinhanh_add">
 	                                    </div>	
 	                                </div>
-	                                
 	                                <div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    	<p>Hình ảnh cũ</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<img alt="" src="${pageContext.request.contextPath}/files/${objMobile.picture}" width="200">
+	                                    	<img alt="" src="${pageContext.request.contextPath}/files/${dienthoai.sanpham.hinhanh}" width="200">
 	                                    </div>	
 	                                </div>
 	                                
@@ -72,7 +64,17 @@
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
 	                                    	<%-- <form:errors path="objMobile.gia" cssStyle="color:red"></form:errors> --%>
-	                                    	<input type="text" name="gia" value="${objMobile.gia}">
+	                                    	<input type="text" name="gia" value="${dienthoai.sanpham.gia}">
+	                                    </div>	
+	                                </div>
+	                                
+	                                <div class="row">
+	                                    <div class="col-lg-3 col-md-3 col-sm-3">
+	                                    	<p>Số lượng</p>
+	                                    </div>
+	                                    <div class="col-lg-9 col-md-9 col-sm-9">
+	                                    	<%-- <form:errors path="objMobile.gia" cssStyle="color:red"></form:errors> --%>
+	                                    	<input type="text" name="soluongconlai" value="${dienthoai.sanpham.soluongconlai}">
 	                                    </div>	
 	                                </div>
 	                            	
@@ -81,7 +83,7 @@
 	                                    	<p>Kích thước</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="size" value="${objMobile.size}">
+	                                    	<input type="text" name="kichco" value="${dienthoai.kichco}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -90,7 +92,7 @@
 	                                    	<p>Băng tần</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="bang_tan" value="${objMobile.bang_tan}">
+	                                    	<input type="text" name="bangtan" value="${dienthoai.bangtan}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -99,7 +101,7 @@
 	                                    	<p>Chip đồ họa</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="chip" value="${objMobile.chip}">
+	                                    	<input type="text" name="chip" value="${dienthoai.chip}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -108,7 +110,7 @@
 	                                    	<p>CPU</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="cpu" value="${objMobile.cpu}">
+	                                    	<input type="text" name="cpu" value="${dienthoai.cpu}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -117,7 +119,7 @@
 	                                    	<p>Bộ nhớ trong</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="memory" value="${objMobile.memory}">
+	                                    	<input type="text" name="memory" value="${dienthoai.memory}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -126,16 +128,7 @@
 	                                    	<p>Ram</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="ram" value="${objMobile.ram}">
-	                                    </div>	
-	                                </div>
-	                                
-	                                <div class="row">
-	                                    <div class="col-lg-3 col-md-3 col-sm-3">
-	                                    	<p>Cảm biến</p>
-	                                    </div>
-	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="cam_bien" value="${objMobile.cam_bien}">
+	                                    	<input type="text" name="ram" value="${dienthoai.ram}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -144,7 +137,7 @@
 	                                    	<p>Bluetooth</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="bluetooth" value="${objMobile.bluetooth}">
+	                                    	<input type="text" name="bluetooth" value="${dienthoai.bluetooth}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -153,7 +146,7 @@
 	                                    	<p>Wlan</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="wlan" value="${objMobile.wlan}">
+	                                    	<input type="text" name="wlan" value="${dienthoai.wlan}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -162,7 +155,7 @@
 	                                    	<p>GPS</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="gps" value="${objMobile.gps}">
+	                                    	<input type="text" name="gps" value="${dienthoai.gps}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -171,7 +164,7 @@
 	                                    	<p>Pin</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="pin" value="${objMobile.pin}">
+	                                    	<input type="text" name="pin" value="${dienthoai.pin}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -180,7 +173,7 @@
 	                                    	<p>Màn hình</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="screen" value="${objMobile.screen}">
+	                                    	<input type="text" name="manhinh" value="${dienthoai.manhinh}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -189,7 +182,7 @@
 	                                    	<p>Sim</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="sim" value="${objMobile.sim}">
+	                                    	<input type="text" name="sim" value="${dienthoai.sim}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -198,7 +191,7 @@
 	                                    	<p>Camera trước</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="camera_truoc" value="${objMobile.camera_truoc}">
+	                                    	<input type="text" name="cameratruoc" value="${dienthoai.cameratruoc}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -207,7 +200,7 @@
 	                                    	<p>Camera sau</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="camera_sau" value="${objMobile.camera_sau}">
+	                                    	<input type="text" name="camerasau" value="${dienthoai.camerasau}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -216,7 +209,7 @@
 	                                    	<p>Quay phim</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="quay_phim" value="${objMobile.quay_phim}">
+	                                    	<input type="text" name="quayphim" value="${dienthoai.quayphim}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -225,7 +218,7 @@
 	                                    	<p>Đánh giá</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<textarea rows="10" cols="" name="danh_gia">${objMobile.danh_gia}</textarea>
+	                                    	<textarea rows="10" cols="" name="danhgia" >${dienthoai.danhgia}</textarea>
 	                                    </div>	
 	                                </div>
 	                                
@@ -244,7 +237,7 @@
                     </div>
 				</section>
 <script type="text/javascript">
-	CKEDITOR.replace( 'danh_gia',
+	CKEDITOR.replace( 'danhgia',
 		{
 			filebrowserBrowseUrl : '/mobileShop/templates/public/ckfinder/ckfinder.html',
 			filebrowserImageBrowseUrl : '/mobileShop/templates/public/ckfinder/ckfinder.html?type=Images',

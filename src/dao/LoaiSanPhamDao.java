@@ -11,14 +11,14 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 
-import entities.VaiTro;
+import entities.LoaiSanPham;
 
-public class VaiTroDao {
-	private String url = "http://192.168.1.3:8082/vaitro";
+public class LoaiSanPhamDao {
+	private String url = "http://192.168.1.3:8082/loaisanpham";
 
-	public List<VaiTro> getItems() {
+	public List<LoaiSanPham> getItems() {
 		String uri = url;
-		List<VaiTro> list = new ArrayList<>();
+		List<LoaiSanPham> list = new ArrayList<>();
 
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -40,9 +40,9 @@ public class VaiTroDao {
 			    Gson gson = new Gson();
 //			    
 			    // chuyển từ json sang đối tượng
-			    VaiTro vaiTro = gson.fromJson(jsonObject.toString(), VaiTro.class);
+			    LoaiSanPham loaiSanPham = gson.fromJson(jsonObject.toString(), LoaiSanPham.class);
 			    
-			    list.add(vaiTro);
+			    list.add(loaiSanPham);
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -51,20 +51,20 @@ public class VaiTroDao {
 	}
 
 	// get Item by id
-	public VaiTro getItem(int id) {
+	public LoaiSanPham getItem(int id) {
 		String uri = url + "/" + id;
 		RestTemplate restTemplate = new RestTemplate();
 		
-		VaiTro vaiTro = null;
+		LoaiSanPham loaiSanPham = null;
 		
 		// Chuỗi json
 		String result = restTemplate.getForObject(uri, String.class);
 		
 		// Tạo đối tượng Gson
 	    Gson gson = new Gson();
-	    vaiTro = gson.fromJson(result, VaiTro.class);
+	    loaiSanPham = gson.fromJson(result, LoaiSanPham.class);
 		
-		return vaiTro;
+		return loaiSanPham;
 	}
 
 }

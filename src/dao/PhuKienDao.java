@@ -11,23 +11,22 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 
-import defines.Defines;
-import entities.DienThoai;
+import entities.PhuKien;
 
-public class DienThoaiDao {
+public class PhuKienDao {
 
-	private static String url = Defines.url + "dienthoai";
+	private static String url = "http://192.168.1.3:8082/phukien";
 	
-	public DienThoaiDao() {
+	public PhuKienDao() {
 		
 	}
 
 	// get list
-	public List<DienThoai> getItems() {
+	public List<PhuKien> getItems() {
 		String uri = url;
 		RestTemplate restTemplate = new RestTemplate();
 		
-		List<DienThoai> list = new ArrayList<>();
+		List<PhuKien> list = new ArrayList<>();
 		
 		// Chuỗi json
 		String result = restTemplate.getForObject(uri, String.class);
@@ -51,9 +50,9 @@ public class DienThoaiDao {
 			    Gson gson = new Gson();
 //			    
 			    // chuyển từ json sang đối tượng
-			    DienThoai dienThoai = gson.fromJson(jsonObject.toString(), DienThoai.class);
+			    PhuKien phuKien = gson.fromJson(jsonObject.toString(), PhuKien.class);
 //			    
-			    list.add(dienThoai);
+			    list.add(phuKien);
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -61,40 +60,39 @@ public class DienThoaiDao {
 		return list;
 	}
 
-	public DienThoai getItem(int id) {
+	public PhuKien getItem(int id) {
 		String uri = url + "/" + id;
 		RestTemplate restTemplate = new RestTemplate();
 		String jsonString = restTemplate.getForObject(uri, String.class);
 		
-		DienThoai dienThoai = null;
+		PhuKien obj = null;
 		
 		Gson gson = new Gson();
-		dienThoai = gson.fromJson(jsonString, DienThoai.class);
-		return dienThoai;
+		obj = gson.fromJson(jsonString, PhuKien.class);
+		return obj;
 	}
 
-	// add
-	public DienThoai addItem(DienThoai dienThoai) {
+	public PhuKien addItem(PhuKien phuKien) {
 		String uri = url + "/add";
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate = new RestTemplate();
-		DienThoai result = restTemplate.postForObject(uri, dienThoai, DienThoai.class);
+		PhuKien result = restTemplate.postForObject(uri, phuKien, PhuKien.class);
 		return result;
 	}
 
-	// update
-	public DienThoai editItem(DienThoai dienThoai) {
-		String uri = url + "/update";
-		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.put(uri, dienThoai);
-		return dienThoai;
-	}
-		
 	public int delItem(int id) {
 		String uri = url + "/delete/" + id;
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.delete(uri);
 		return id;
+	}
+
+	// update
+	public PhuKien editItem(PhuKien phuKien) {
+		String uri = url + "/update";
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.put(uri, phuKien);
+		return phuKien;
 	}
 
 //	public int getTotal() {

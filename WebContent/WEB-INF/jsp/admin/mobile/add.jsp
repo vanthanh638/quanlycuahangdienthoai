@@ -11,32 +11,32 @@
                             </div>
                             
                             <div class="page-content">
-                            	<form id="frmMobile" action="${pageContext.request.contextPath}/admincp/mobile/add" method="post" enctype="multipart/form-data">
+                            	<form id="frmMobile" action="${pageContext.request.contextPath}/admin/mobile/add" method="post" enctype="multipart/form-data">
 	                            	
-	                            	<div class="row">
+	                            	<%-- <div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
 	                                    	<form:errors path="objMobile.name_mobile" cssStyle="color:red"></form:errors>
 	                                    </div>	
-	                                </div>
+	                                </div> --%>
 	                            	<div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    	<p>Tên điện thoại</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="name_mobile">
+	                                    	<input type="text" name="tensanpham">
 	                                    </div>	
 	                                </div>
 	                                
 	                                <div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
-	                                    	<p>Hãng sản xuất</p>
+	                                    	<p>Loại sản phẩm</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<select name="id_pro">
-	                                    		<c:forEach items="${listPro}" var="objPro">
-	                                    			<option value="${objPro.id_pro}">${objPro.name_pro}</option>
+	                                    	<select name="id_loaisp">
+	                                    		<c:forEach items="${listLSP}" var="lsp">
+	                                    			<option value="${lsp.id_loaisanpham}">${lsp.tenloai}</option>
 	                                    		</c:forEach>
 	                                    	</select>
 	                                    </div>	
@@ -47,7 +47,7 @@
 	                                    	<p>Hình ảnh</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="file" name="picture_add">
+	                                    	<input type="file" name="hinhanh_add">
 	                                    </div>	
 	                                </div>
 	                                
@@ -60,13 +60,23 @@
 	                                    	<input type="text" name="gia">
 	                                    </div>	
 	                                </div>
+	                                
+	                                <div class="row">
+	                                    <div class="col-lg-3 col-md-3 col-sm-3">
+	                                    	<p>Số lượng</p>
+	                                    </div>
+	                                    <div class="col-lg-9 col-md-9 col-sm-9">
+	                                    	<%-- <form:errors path="objMobile.gia" cssStyle="color:red"></form:errors> --%>
+	                                    	<input type="text" name="soluongconlai">
+	                                    </div>	
+	                                </div>
 	                            	
 	                            	<div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    	<p>Kích thước</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="size">
+	                                    	<input type="text" name="kichco">
 	                                    </div>	
 	                                </div>
 	                                
@@ -75,7 +85,7 @@
 	                                    	<p>Băng tần</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="bang_tan">
+	                                    	<input type="text" name="bangtan">
 	                                    </div>	
 	                                </div>
 	                                
@@ -112,15 +122,6 @@
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
 	                                    	<input type="text" name="ram">
-	                                    </div>	
-	                                </div>
-	                                
-	                                <div class="row">
-	                                    <div class="col-lg-3 col-md-3 col-sm-3">
-	                                    	<p>Cảm biến</p>
-	                                    </div>
-	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="cam_bien">
 	                                    </div>	
 	                                </div>
 	                                
@@ -165,7 +166,7 @@
 	                                    	<p>Màn hình</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="screen">
+	                                    	<input type="text" name="manhinh">
 	                                    </div>	
 	                                </div>
 	                                
@@ -183,7 +184,7 @@
 	                                    	<p>Camera trước</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="camera_truoc">
+	                                    	<input type="text" name="cameratruoc">
 	                                    </div>	
 	                                </div>
 	                                
@@ -192,7 +193,7 @@
 	                                    	<p>Camera sau</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="camera_sau">
+	                                    	<input type="text" name="camerasau">
 	                                    </div>	
 	                                </div>
 	                                
@@ -201,7 +202,7 @@
 	                                    	<p>Quay phim</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="quay_phim">
+	                                    	<input type="text" name="quayphim">
 	                                    </div>	
 	                                </div>
 	                                
@@ -210,7 +211,7 @@
 	                                    	<p>Đánh giá</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<textarea rows="10" cols="" name="danh_gia"></textarea>
+	                                    	<textarea rows="10" cols="" name="danhgia"></textarea>
 	                                    </div>	
 	                                </div>
 	                                
@@ -229,7 +230,7 @@
                     </div>
 				</section>
 <script type="text/javascript">
-	CKEDITOR.replace( 'danh_gia',
+	CKEDITOR.replace( 'danhgia',
 		{
 			filebrowserBrowseUrl : '/mobileShop/templates/public/ckfinder/ckfinder.html',
 			filebrowserImageBrowseUrl : '/mobileShop/templates/public/ckfinder/ckfinder.html?type=Images',

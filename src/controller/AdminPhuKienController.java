@@ -16,19 +16,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import dao.DienThoaiDao;
 import dao.LoaiSanPhamDao;
+import dao.PhuKienDao;
 import defines.Defines;
-import entities.DienThoai;
 import entities.LoaiSanPham;
+import entities.PhuKien;
 import entities.SanPham;
 import utils.RenameFileUtils;
 import utils.SlugUtils;
 
 @Controller
 
-@RequestMapping(value = "admin/mobile")
-public class AdminMobileController {
+@RequestMapping(value = "admin/phu-kien")
+public class AdminPhuKienController {
 
 	@Autowired
 	private Defines defines;
@@ -36,10 +36,10 @@ public class AdminMobileController {
 	@Autowired
 	private SlugUtils slug;
 
-//	private DienThoaiDao dienThoaiDao;
+//	private PhuKienDao phuKienDao;
 	private LoaiSanPhamDao loaiSanPhamDao;
 
-	public AdminMobileController() {
+	public AdminPhuKienController() {
 		
 		loaiSanPhamDao = new LoaiSanPhamDao();
 	}
@@ -52,44 +52,43 @@ public class AdminMobileController {
 
 	@RequestMapping(value = "")
 	public String index(ModelMap modelMap, @RequestParam(value = "page", defaultValue = "1") int page) {
-		DienThoaiDao dienThoaiDao = new DienThoaiDao();
-		modelMap.addAttribute("listDienThoai", dienThoaiDao.getItems());
-		return "admin.mobile.index";
+		PhuKienDao phuKienDao = new PhuKienDao();
+		modelMap.addAttribute("listPK", phuKienDao.getItems());
+		return "admin.phu_kien.index";
 	}
 
 	// show-edit
 	@RequestMapping(value = "edit/{id}")
 	public String edit(ModelMap modelMap, @PathVariable("id") int id) {
-		DienThoaiDao dienThoaiDao = new DienThoaiDao();
-		modelMap.addAttribute("dienthoai", dienThoaiDao.getItem(id));
+		PhuKienDao phuKienDao = new PhuKienDao();
+		modelMap.addAttribute("objPK", phuKienDao.getItem(id));
 		modelMap.addAttribute("listLSP", loaiSanPhamDao.getItems());
-		return "admin.mobile.edit";
+		return "admin.phu_kien.edit";
 	}
 
 	// xử lý edit
 	@RequestMapping(value = "edit/{id}", method = RequestMethod.POST)
-	public String edit(@ModelAttribute("dienThoai") DienThoai dienThoai, @ModelAttribute("sanpham") SanPham sanpham,
+	public String edit(@ModelAttribute("phuKien") PhuKien phuKien, @ModelAttribute("sanpham") SanPham sanpham,
 			BindingResult bindingResult, @RequestParam("hinhanh_add") CommonsMultipartFile cmf,
 			HttpServletRequest request, @RequestParam("id_loaisp") int id_loaisp, @PathVariable("id") int id) {
-		
-		DienThoaiDao dienThoaiDao = new DienThoaiDao();
-		
+		PhuKienDao phuKienDao = new PhuKienDao();
 		LoaiSanPham loaiSanPham = loaiSanPhamDao.getItem(id_loaisp);
-		DienThoai dt = dienThoaiDao.getItem(id);
+		PhuKien pk = phuKienDao.getItem(id);
 		
-		sanpham.setId(dt.getSanpham().getId());
+		sanpham.setId(pk.getSanpham().getId());
 		sanpham.setLoaiSanPham(loaiSanPham);
-		sanpham.setSoluongdaban(dt.getSanpham().getSoluongdaban());
-		sanpham.setLuotxem(dt.getSanpham().getLuotxem());
+		sanpham.setSoluongdaban(pk.getSanpham().getSoluongdaban());
+		sanpham.setLuotxem(pk.getSanpham().getLuotxem());
 		
-		
+		phuKien.setDienthoailienquan("1,2,3");
+		phuKien.setLoailienquan("ncncn");
 		// if (bindingResult.hasErrors()){
 		// return "admin.mobile.add";
 		// }
 		if (!"".equals(cmf.getOriginalFilename())) {
 			// Xóa hình cũ
-			if (!"".equals(dt.getSanpham().getHinhanh())) {
-				String urlFile = request.getServletContext().getRealPath("files") + File.separator + dt.getSanpham().getHinhanh();
+			if (!"".equals(pk.getSanpham().getHinhanh())) {
+				String urlFile = request.getServletContext().getRealPath("files") + File.separator + pk.getSanpham().getHinhanh();
 				System.out.println(request.getServletContext().getRealPath("files"));
 				File delFile = new File(urlFile);
 				delFile.delete();
@@ -114,37 +113,35 @@ public class AdminMobileController {
 				e.printStackTrace();
 			}
 		} else {
-			sanpham.setHinhanh(dt.getSanpham().getHinhanh());
+			sanpham.setHinhanh(pk.getSanpham().getHinhanh());
 		}
-		dienThoai.setSanpham(sanpham);
-		if (dienThoaiDao.editItem(dienThoai) != null) {
-			return "redirect:/admin/mobile?msg=editOK";
+		phuKien.setSanpham(sanpham);
+		if (phuKienDao.editItem(phuKien) != null) {
+			return "redirect:/admin/phu-kien?msg=editOK";
 		}
-		return "redirect:/admin/mobile?msg=editErr";
+		return "redirect:/admin/phu-kien?msg=editErr";
 	}
 	
 	// show-add
 	@RequestMapping(value = "add")
 	public String add(ModelMap modelMap) {
 		modelMap.addAttribute("listLSP", loaiSanPhamDao.getItems());
-		return "admin.mobile.add";
+		return "admin.phu_kien.add";
 	}
 	
 	// addItem
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String add(@ModelAttribute("dienThoai") DienThoai dienThoai, @ModelAttribute("sanpham") SanPham sanpham,
+	public String add(@ModelAttribute("phuKien") PhuKien phuKien, @ModelAttribute("sanpham") SanPham sanpham,
 			BindingResult bindingResult, @RequestParam("hinhanh_add") CommonsMultipartFile cmf,
 			HttpServletRequest request, @RequestParam("id_loaisp") int id_loaisp) {
-		System.out.println(dienThoai.getBangtan());
-		System.out.println("Ten san pham" + sanpham.getTensanpham());
-		
-		DienThoaiDao dienThoaiDao = new DienThoaiDao();
-		
+		PhuKienDao phuKienDao = new PhuKienDao();
 		LoaiSanPham loaiSanPham = loaiSanPhamDao.getItem(id_loaisp);
 		sanpham.setLoaiSanPham(loaiSanPham);
 		sanpham.setSoluongdaban(0);
 		sanpham.setLuotxem(0);
-		dienThoai.setSanpham(sanpham);
+		
+		phuKien.setDienthoailienquan("1,2,3");
+		phuKien.setLoailienquan("ncncn");
 		// if (bindingResult.hasErrors()){
 		// return "admin.mobile.add";
 		// }
@@ -167,34 +164,35 @@ public class AdminMobileController {
 				e.printStackTrace();
 			}
 		}
-		if (dienThoaiDao.addItem(dienThoai) != null) {
-			return "redirect:/admin/mobile?msg=addOK";
+		
+		phuKien.setSanpham(sanpham);
+		if (phuKienDao.addItem(phuKien) != null) {
+			return "redirect:/admin/phu-kien?msg=addOK";
 		}
-		return "redirect:/admin/mobile?msg=addErr";
+		return "redirect:/admin/phu-kien?msg=addErr";
 	}
 	
 	// xóa
 	// delItem
 	@RequestMapping(value="del/{id}")
 	public String del(@PathVariable("id") int id, HttpServletRequest request){
-		DienThoaiDao dienThoaiDao = new DienThoaiDao();
-		
-		DienThoai dt = dienThoaiDao.getItem(id);
-		if (dt != null){
-			if (dienThoaiDao.delItem(id) > 0){
-				if (!"".equals(dt.getSanpham().getHinhanh())) {
+		PhuKienDao phuKienDao = new PhuKienDao();
+		PhuKien pk = phuKienDao.getItem(id);
+		if (pk != null){
+			if (phuKienDao.delItem(id) > 0){
+				if (!"".equals(pk.getSanpham().getHinhanh())) {
 					// xóa hình
-					String urlFile = request.getServletContext().getRealPath("files") + File.separator + dt.getSanpham().getHinhanh();
+					String urlFile = request.getServletContext().getRealPath("files") + File.separator + pk.getSanpham().getHinhanh();
 					System.out.println(request.getServletContext().getRealPath("files"));
 					File delFile = new File(urlFile);
 					delFile.delete();
 				}
-				return "redirect:/admin/mobile?msg=delOK";
+				return "redirect:/admin/phu-kien?msg=delOK";
 			} 
-			return "redirect:/admin/mobile?msg=delErr";
+			return "redirect:/admin/phu-kien?msg=delErr";
 		}
 		
-		return "redirect:/admin/mobile";
+		return "redirect:/admin/phu-kien";
 	}
 
 }

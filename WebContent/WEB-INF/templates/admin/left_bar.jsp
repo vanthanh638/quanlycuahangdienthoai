@@ -18,7 +18,6 @@
 									<li><a href="${pageContext.request.contextPath}/admin/mobile">Điện thoại<i class="icons icon-right-dir"></i></a></li>
 									<li><a href="${pageContext.request.contextPath}/admin/producer">Hãng sản xuất<i class="icons icon-right-dir"></i></a></li>
 									<li><a href="${pageContext.request.contextPath}/admin/phu-kien">Phụ kiện<i class="icons icon-right-dir"></i></a></li>
-									<li><a href="${pageContext.request.contextPath}/admin/loai-phu-kien">Loại phụ kiên<i class="icons icon-right-dir"></i></a></li>
 									<li><a href="${pageContext.request.contextPath}/admin/don-hang">Đơn hàng<i class="icons icon-right-dir"></i></a></li>
 									<li><a href="${pageContext.request.contextPath}/admin/pays">Hình thức thanh toán<i class="icons icon-right-dir"></i></a></li>
 									<li><a href="${pageContext.request.contextPath}/admin/advs">Quảng cáo<i class="icons icon-right-dir"></i></a></li>
