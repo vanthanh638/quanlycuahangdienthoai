@@ -11,16 +11,15 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 
-import entities.Slide;
-import entities.VaiTro;
+import entities.PhuKien;
 
-public class SlideDao {
-	private String url = "http://192.168.1.3:8082/slide";
+public class PhuKienDao {
+	private String url = "http://192.168.1.3:8082/phukien";
 	private RestTemplate restTemplate;
 
-	public List<Slide> getItems() {
+	public List<PhuKien> getItems() {
 		String uri = url;
-		List<Slide> list = new ArrayList<>();
+		List<PhuKien> list = new ArrayList<>();
 
 		restTemplate = new RestTemplate();
 
@@ -42,9 +41,9 @@ public class SlideDao {
 			    Gson gson = new Gson();
 //			    
 			    // chuyển từ json sang đối tượng
-			    Slide slide = gson.fromJson(jsonObject.toString(), Slide.class);
+			    PhuKien phukien = gson.fromJson(jsonObject.toString(), PhuKien.class);
 			    
-			    list.add(slide);
+			    list.add(phukien);
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -53,20 +52,18 @@ public class SlideDao {
 	}
 
 	// get Item by id
-	public Slide getItem(int id) {
+	public PhuKien getItem(int id) {
 		String uri = url + "/" + id;
 		restTemplate = new RestTemplate();
 		
-		Slide slide = null;
+		PhuKien phukien = null;
 		
 		// Chuỗi json
 		String result = restTemplate.getForObject(uri, String.class);
 		
 		// Tạo đối tượng Gson
 	    Gson gson = new Gson();
-	    slide = gson.fromJson(result, Slide.class);
-		
-		return slide;
+	    phukien = gson.fromJson(result, PhuKien.class);
+		return phukien;
 	}
-
 }

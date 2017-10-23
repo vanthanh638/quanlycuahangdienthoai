@@ -12,7 +12,7 @@
 									<li data-transition="fade" data-slotamount="7" data-masterspeed="1500" >
 										<!-- MAIN IMAGE -->
 										
-										<img src="${pageContext.request.contextPath}/files/${objSlide.picture}"  alt="${objSlide.name}"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+										<img src="${pageContext.request.contextPath}/files/${objSlide.hinhanh}"  alt="${objSlide.ten}"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
 										
 									</li>
 									</c:forEach>
@@ -102,14 +102,18 @@
 							</div>
 							
 						</div>
+						
+						
+						<div class="products-row row">
+						
 						<!-- /Carousel Heading -->
 						
 						<!-- Carousel -->
 						<!-- Phụ kiện -->
-						<%-- <div class="carousel owl-carousel-wrap col-lg-12 col-md-12 col-sm-12">
+						<div class="carousel owl-carousel-wrap col-lg-12 col-md-12 col-sm-12">
 							
 							<div class="owl-carousel" data-max-items="3">
-									<c:forEach items="${listPK}" var="objPK">
+									<c:forEach items="${listPK}" var="phukien">
 										<!-- Slide -->
 										<div>
 											<!-- Carousel Item -->
@@ -117,18 +121,18 @@
 												
 												<div class="product-image">
 													<!-- <span class="product-tag">Sale</span> -->
-													<img src="${pageContext.request.contextPath}/files/${objPK.picture}" alt="Product1">
-													<a href="${pageContext.request.contextPath}/phu-kien/${slug.makeSlug(objPK.name_pk)}-pk${objPK.id_pk}" class="product-hover">
+													<img src="${phukien.sanpham.hinhanh}" alt="Product1">
+													<a href="${pageContext.request.contextPath}/phu-kien/${slug.makeSlug(phukien.sanpham.tensanpham)}-pk${phukien.id}" class="product-hover">
 														<i class="icons icon-eye-1"></i> Xem ngay
 													</a>
 												</div>
 												
 												<div class="product-info">
-													<h5><a href="${pageContext.request.contextPath}/phu-kien/${slug.makeSlug(objPK.name_pk)}-pk${objPK.id_pk}">${objPK.name_pk}</a></h5>
-													<span class="price">${formatNumber.formatNumber(objPK.)} VNĐ</span>
+													<h5><a href="${pageContext.request.contextPath}/phu-kien/${slug.makeSlug(phukien.sanpham.tensanpham)}-pk${phukien.id}">${phukien.sanpham.tensanpham}</a></h5>
+													<span class="price">${formatNumber.formatNumber(phukien.sanpham.gia)} VNĐ</span>
 												</div>
 												
-												<div class="product-actions" onclick="return addCart('${objPK.name_pk}', '${objPK.picture}', ${objPK.})">
+												<div class="product-actions" onclick="return addCart('${phukien.sanpham.tensanpham}', '${phukien.sanpham.hinhanh}', ${phukien.sanpham.gia})">
 													<span class="add-to-cart">
 														<span class="action-wrapper">
 															<i class="icons icon-basket-2"></i>
@@ -144,7 +148,7 @@
 										<!-- /Slide -->
 									</c:forEach>
 							</div>
-						</div> --%>
+						</div> 
 						<!-- /Carousel -->
 						
 						<!-- END phụ kiên -->

@@ -18,6 +18,7 @@ public class DienThoai {
 	private String cameratruoc;
 	private String camerasau;
 	private String quayphim;
+	private String danhgia;
 	
 	public DienThoai() {
 		super();
@@ -26,7 +27,7 @@ public class DienThoai {
 
 	public DienThoai(int id, SanPham sanpham, String kichco, String bangtan, String chip, String cpu, String memory,
 			String ram, String bluetooth, String wlan, String gps, String pin, String manhinh, String sim,
-			String cameratruoc, String camerasau, String quayphim) {
+			String cameratruoc, String camerasau, String quayphim,String danhgia) {
 		super();
 		this.id = id;
 		this.sanpham = sanpham;
@@ -45,6 +46,17 @@ public class DienThoai {
 		this.cameratruoc = cameratruoc;
 		this.camerasau = camerasau;
 		this.quayphim = quayphim;
+		this.danhgia = danhgia;
+	}
+	
+	
+
+	public String getDanhgia() {
+		return danhgia;
+	}
+
+	public void setDanhgia(String danhgia) {
+		this.danhgia = danhgia;
 	}
 
 	public int getId() {
