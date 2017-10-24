@@ -11,10 +11,11 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 
+import defines.Defines;
 import entities.VaiTro;
 
 public class VaiTroDao {
-	private String url = "http://192.168.1.3:8082/vaitro";
+	private String url = Defines.url + "vaitro";
 
 	public List<VaiTro> getItems() {
 		String uri = url;

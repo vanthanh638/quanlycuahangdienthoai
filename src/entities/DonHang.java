@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 public class DonHang {
@@ -11,7 +12,7 @@ public class DonHang {
 	private String sodienthoai;
 	private String ngaykhoitao;
 	private int trangthai;
-	private Set<ChiTietDonHang> chiTietDonHangs;
+	private List<ChiTietDonHang> chiTietDonHangs;
 	private NguoiDung nguoidung;
 	private ThanhToan thanhToan;
 	
@@ -20,7 +21,7 @@ public class DonHang {
 	}
 
 	public DonHang(int id, String hoten, String diachi, String sodienthoai, String ngaykhoitao, int trangthai,
-			Set<ChiTietDonHang> chiTietDonHangs, NguoiDung nguoidung, ThanhToan thanhToan) {
+			List<ChiTietDonHang> chiTietDonHangs, NguoiDung nguoidung, ThanhToan thanhToan) {
 		super();
 		this.id = id;
 		this.hoten = hoten;
@@ -81,11 +82,11 @@ public class DonHang {
 		this.trangthai = trangthai;
 	}
 
-	public Set<ChiTietDonHang> getChiTietDonHangs() {
+	public List<ChiTietDonHang> getChiTietDonHangs() {
 		return chiTietDonHangs;
 	}
 
-	public void setChiTietDonHangs(Set<ChiTietDonHang> chiTietDonHangs) {
+	public void setChiTietDonHangs(List<ChiTietDonHang> chiTietDonHangs) {
 		this.chiTietDonHangs = chiTietDonHangs;
 	}
 

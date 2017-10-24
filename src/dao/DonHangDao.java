@@ -1,8 +1,6 @@
 package dao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -91,10 +89,44 @@ public class DonHangDao {
 		return donHang;
 	}
 		
+	// delete
 	public int delItem(int id) {
 		String uri = url + "/delete/" + id;
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.delete(uri);
 		return id;
+	}
+
+	// get DonHang By Id người dùng
+	public List<DonHang> getItemsByIdNguoiDung(int id) {
+		String uri = url + "/getbykhachhangid/" + id;
+		RestTemplate restTemplate = new RestTemplate();
+		
+		List<DonHang> list = new ArrayList<>();
+		
+		// Chuỗi json
+		String result = restTemplate.getForObject(uri, String.class);
+		try {
+			// 1. Tạo ra một JSONParser
+			JSONParser jsonParser = new JSONParser();
+			
+			// 2. Parser chuỗi JSON về một JSONArray
+			JSONArray jsonArray = (JSONArray) jsonParser.parse(result);
+			
+			for (int i = 0; i < jsonArray.size(); i++) {
+				JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+				
+				// Tạo đối tượng Gson
+			    Gson gson = new Gson();
+			    
+			    // chuyển từ json sang đối tượng
+			    DonHang donHang = gson.fromJson(jsonObject.toString(), DonHang.class);
+			    
+			    list.add(donHang);
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 }

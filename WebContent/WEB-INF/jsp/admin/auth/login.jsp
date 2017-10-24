@@ -8,7 +8,7 @@
                             <div class="carousel-heading no-margin">
                                 <h3>Đăng nhập</h3>
                             </div>
-                            <form action="${pageContext.request.contextPath}/login" method="post">
+                            <form action="${pageContext.request.contextPath}/admin/login" method="post">
 	                            <div class="page-content">
 	                                <div class="row">
 	                                	<div class="col-lg-6 col-md-6 col-sm-6">

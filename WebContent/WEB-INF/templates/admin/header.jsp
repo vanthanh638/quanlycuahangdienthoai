@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/templates/taglib.jsp" %>
+
 <!DOCTYPE html>
 
 <html>
@@ -12,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <!-- Title -->
-        <title>MobileShop - Admincp</title>
+        <title>MobileShop - Admin </title>
         
 		<!-- Fonts -->
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700,900,700italic,500italic' rel='stylesheet' type='text/css'>
@@ -71,10 +72,10 @@
 								<c:if test="${userImfor != null}">
 									<ul class="pull-right">
 										<li class="purple">
-											<i class="icons icon-user-3"></i> ${userImfor.username}
+											<i class="icons icon-user-3"></i> ${userImfor.tendangnhap}
 										</li>
 										<li class="purple">
-											<a href="${pageContext.request.contextPath}/logout"><i class="icons icon-user-3"></i> Logout</a>
+											<a href="${pageContext.request.contextPath}/admin/logout"><i class="icons icon-user-3"></i> Logout</a>
 										</li>
 									</ul>
 								</c:if>

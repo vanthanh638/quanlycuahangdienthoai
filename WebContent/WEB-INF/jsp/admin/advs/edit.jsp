@@ -11,12 +11,12 @@
                             </div>
                             
                             <div class="page-content">
-                            	<form action="${pageContext.request.contextPath}/admincp/advs/edit/${objAdvs.id}" method="post" enctype="multipart/form-data">
+                            	<form action="${pageContext.request.contextPath}/admin/quang-cao/edit/${objQC.id}" method="post" enctype="multipart/form-data">
 	                            	<div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<form:errors path="objAdvs.name" cssStyle="color:red"></form:errors>
+	                                    	<form:errors path="objQC.ten" cssStyle="color:red"></form:errors>
 	                                    </div>	
 	                                </div>
 	                            	<div class="row">
@@ -24,14 +24,14 @@
 	                                    	<p>Tên</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="name" value="${objAdvs.name}">
+	                                    	<input type="text" name="ten" value="${objQC.ten}">
 	                                    </div>	
 	                                </div>
 	                                <div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<form:errors path="objAdvs.link" cssStyle="color:red"></form:errors>
+	                                    	<form:errors path="objQC.lienket" cssStyle="color:red"></form:errors>
 	                                    </div>	
 	                                </div>
 	                                <div class="row">
@@ -39,7 +39,7 @@
 	                                    	<p>Link</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="link" value="${objAdvs.link}">
+	                                    	<input type="text" name="lienket" value="${objQC.lienket}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -55,9 +55,9 @@
 	                                <div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    </div>
-	                                    <c:if test="${objAdvs.picture!=null}">
+	                                    <c:if test="${objQC.hinhanh != null}">
 		                                    <div class="col-lg-9 col-md-9 col-sm-9">
-												<img alt="" src="${pageContext.request.contextPath}/files/${objAdvs.picture}" width="180">
+												<img alt="" src="${pageContext.request.contextPath}/files/${objQC.hinhanh}" width="180">
 		                                    </div>	
 	                                    </c:if>
 	                                </div>

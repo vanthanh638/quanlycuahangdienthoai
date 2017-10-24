@@ -11,12 +11,12 @@
                             </div>
                             
                             <div class="page-content">
-                            	<form action="${pageContext.request.contextPath}/admincp/advs/add" method="post" enctype="multipart/form-data">
+                            	<form action="${pageContext.request.contextPath}/admin/quang-cao/add" method="post" enctype="multipart/form-data">
 	                            	<div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<form:errors path="objAdvs.name" cssStyle="color:red"></form:errors>
+	                                    	<form:errors path="quangCao.ten" cssStyle="color:red"></form:errors>
 	                                    </div>	
 	                                </div>
 	                            	<div class="row">
@@ -24,14 +24,14 @@
 	                                    	<p>Tên</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="name" value="">
+	                                    	<input type="text" name="ten" value="">
 	                                    </div>	
 	                                </div>
 	                                <div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<form:errors path="objAdvs.link" cssStyle="color:red"></form:errors>
+	                                    	<form:errors path="quangCao.lienket" cssStyle="color:red"></form:errors>
 	                                    </div>	
 	                                </div>
 	                                <div class="row">
@@ -39,7 +39,7 @@
 	                                    	<p>Link</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="link" value="">
+	                                    	<input type="text" name="lienket" value="">
 	                                    </div>	
 	                                </div>
 	                                

@@ -1,3 +1,4 @@
+<%@page import="entities.NguoiDung"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/templates/taglib.jsp" %>
@@ -112,7 +113,7 @@
 										</c:when>
 										<c:otherwise>
 											<li><a href="${pageContext.request.contextPath}/don-hang-c${objUser.id}"><i class=""></i> Đơn hàng</a></li>
-											<li><a href="${pageContext.request.contextPath}/account"><i class="icons icon-user-1"></i> ${objUser.username}</a></li>
+											<li><a href="${pageContext.request.contextPath}/account"><i class="icons icon-user-1"></i> ${objUser.tendangnhap}</a></li>
 											<li><a href="${pageContext.request.contextPath}/account/logout"><i class="icons icon-lock"></i> Đăng xuất</a></li>
 										</c:otherwise>
 									</c:choose>
@@ -151,13 +152,13 @@
 	                                                    	<c:forEach begin="0" end="${cart.total()-1}" var="i">
 		                                                    	<c:set var="objProduct" value="${cart.getItem(i)}"></c:set>
 		                                                    	<tr>
-		                                                    		<td><img src="${pageContext.request.contextPath}/files/${objProduct.picture}" alt="product"></td>
+		                                                    		<td><img src="${pageContext.request.contextPath}/files/${objProduct.sanpham.hinhanh}" alt="product"></td>
 		                                                            <td>
-		                                                                <h6>${objProduct.san_pham}</h6>
+		                                                                <h6>${objProduct.sanpham.tensanpham}</h6>
 		                                                                <!-- <p>Product code PSBJ3</p> -->
 		                                                            </td>
 		                                                            <td>
-		                                                            	<span class="quantity"><span class="light">${objProduct.so_luong} x</span> ${formatNumber.formatNumber(objProduct.gia)}</span>
+		                                                            	<span class="quantity"><span class="light">${objProduct.soluong} x</span> ${formatNumber.formatNumber(objProduct.gia)}</span>
 		                                                            </td>
 		                                                        </tr>
 	                                                       </c:forEach>

@@ -6,62 +6,62 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<http use-expressions="true">
+	<!-- <http use-expressions="true">
 		<csrf disabled="true"/>
 
-		<!-- <intercept-url pattern="/admincp" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
+		<intercept-url pattern="/admin" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
 		
-		<intercept-url pattern="/admincp/user" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
-		<intercept-url pattern="/admincp/lien-he" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
-		<intercept-url pattern="/admincp/mobile" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
-		<intercept-url pattern="/admincp/producer" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
-		<intercept-url pattern="/admincp/phu-kien" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
-		<intercept-url pattern="/admincp/loai-phu-kien" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
-		<intercept-url pattern="/admincp/don-hang" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
-		<intercept-url pattern="/admincp/advs" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
-		<intercept-url pattern="/admincp/search" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
+		<intercept-url pattern="/admin/user" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
+		<intercept-url pattern="/admin/lien-he" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
+		<intercept-url pattern="/admin/mobile" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
+		<intercept-url pattern="/admin/producer" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
+		<intercept-url pattern="/admin/phu-kien" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
+		<intercept-url pattern="/admin/loai-phu-kien" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
+		<intercept-url pattern="/admin/don-hang" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
+		<intercept-url pattern="/admin/advs" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
+		<intercept-url pattern="/admin/search" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_STA')" />
 		
-		<intercept-url pattern="/admincp/lien-he/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
-		<intercept-url pattern="/admincp/mobile/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
-		<intercept-url pattern="/admincp/producer/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
-		<intercept-url pattern="/admincp/phu-kien/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
-		<intercept-url pattern="/admincp/loai-phu-kien/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
-		<intercept-url pattern="/admincp/don-hang/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
-		<intercept-url pattern="/admincp/advs/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/lien-he/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/mobile/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/producer/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/phu-kien/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/loai-phu-kien/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/don-hang/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/advs/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
 		
-		<intercept-url pattern="/admincp/mobile/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
-		<intercept-url pattern="/admincp/producer/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
-		<intercept-url pattern="/admincp/phu-kien/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/mobile/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/producer/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/phu-kien/**" access="hasAnyRole('ROLE_MOD', 'ROLE_ADMIN')" />
 		
-        <intercept-url pattern="/admincp/user/**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/admincp/lien-he/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/admin/user/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/admin/lien-he/**" access="hasRole('ROLE_ADMIN')" />
         
-        <intercept-url pattern="/admincp/**" access="hasRole('ROLE_ADMIN')" /> -->
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
         
         <intercept-url pattern="/**" access="permitAll()" />
  
         <access-denied-handler error-page="/403" />
  
         <form-login login-page='/login' login-processing-url="/login"
-            default-target-url="/admincp" always-use-default-target="false"
-            authentication-failure-url="/admincp/login?error=loginErr" username-parameter="username"
+            default-target-url="/admin" always-use-default-target="false"
+            authentication-failure-url="/admin/login?error=loginErr" username-parameter="username"
             password-parameter="password" />
  
         <logout logout-url="/logout" logout-success-url="/login"
             delete-cookies="JSESSIONID" invalidate-session="true" />
  
-    </http>
+    </http> -->
     
     
-    <authentication-manager>
-        <!-- authentication from database -->
-        <authentication-provider>
-           	<password-encoder hash="md5" /> 
-            
-            <jdbc-user-service data-source-ref="myDataSource"
-                users-by-username-query="select username, password, active from user where username = ?"
-                authorities-by-username-query="select username, concat('ROLE_', role) role from user INNER JOIN role ON user.id_role = role.id_role where username = ?" />
-        </authentication-provider>
-    </authentication-manager>
+    <!-- <authentication-manager>
+		<authentication-provider>
+			<user-service>
+	        	<user name="admin" password="123456" authorities="ROLE_ADMIN" />
+	        	<user name="thanh" password="123456" authorities="ROLE_MOD"/>
+	        	<user name="thanh123" password="123456" authorities="ROLE_USER"/>
+	        </user-service>
+			<password-encoder hash="md5" />
+		</authentication-provider>
+	</authentication-manager> -->
 
 </beans:beans>

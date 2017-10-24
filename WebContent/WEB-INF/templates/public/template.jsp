@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/templates/taglib.jsp" %>
+
   <tiles:insertAttribute name="header"></tiles:insertAttribute>	
 			<!-- Content -->
 			<div class="row content">
