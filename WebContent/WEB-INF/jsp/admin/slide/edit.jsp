@@ -11,13 +11,13 @@
                             </div>
                             
                             <div class="page-content">
-                            	<form action="${pageContext.request.contextPath}/admincp/slide/edit/${objSlide.id}" method="post" enctype="multipart/form-data">
+                            	<form action="${pageContext.request.contextPath}/admin/slide/edit/${objSlide.id}" method="post" enctype="multipart/form-data">
 	                            	<div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    	<p>Tiêu đề</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="name" value="${objSlide.name}">
+	                                    	<input type="text" name="ten" value="${objSlide.ten}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -33,9 +33,9 @@
 	                                <div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    </div>
-	                                    <c:if test="${objSlide.picture!=null}">
+	                                    <c:if test="${objSlide.hinhanh!=null}">
 		                                    <div class="col-lg-9 col-md-9 col-sm-9">
-												<img alt="" src="${pageContext.request.contextPath}/files/${objSlide.picture}" width="180">
+												<img alt="" src="${pageContext.request.contextPath}/files/${objSlide.hinhanh}" width="180">
 		                                    </div>	
 	                                    </c:if>
 	                                </div>

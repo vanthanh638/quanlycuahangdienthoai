@@ -16,7 +16,7 @@
 							<div class="col-lg-6 col-md-6 col-sm-6">
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6">
-								<p class="copyright">Code By Trần Văn Thanh - VinaEnter</p>
+								<p class="copyright">Code By 13T - KTHDV</p>
 							</div>
 							
 							

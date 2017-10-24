@@ -56,7 +56,7 @@
                     	 </div>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                         	<div class="add-green">
-								<a href="${pageContext.request.contextPath}/admincp/advs/add">
+								<a href="${pageContext.request.contextPath}/admin/quang-cao/add">
 									Thêm quảng cáo
 								</a>
 							</div>
@@ -64,27 +64,22 @@
 							<table class="order-table">
                             	
 								<tr>
-									<th style="text-align: center;">ID</th>
 									<th style="text-align: center;">Tên</th>
-									<!-- <th style="text-align: center;">Link</th> -->
 									<th style="text-align: center;" width="200">Hình ảnh</th>
 									<th style="text-align: center;"> Kích hoạt</th>
 									<th style="text-align: center;">Chức năng</th>
 								</tr>
-								<c:forEach items="${listAdvs}" var="objAdvs">
+								<c:forEach items="${listQC}" var="objQC">
 									<tr>
-										<td><p>${objAdvs.id}</p></td>
-										<td class="order-number"><p><a href="#">${objAdvs.name}</a></p>
-										</td>
-										<%-- <td><p>${objAdvs.link}</a></p> --%>
+										<td class="order-number"><p><a href="#">${objQC.ten}</a></p>
 										</td>
 										<td>
-											<img src="${pageContext.request.contextPath}/files/${objAdvs.picture}" alt="" width="180">
+											<img src="${pageContext.request.contextPath}/files/${objQC.hinhanh}" alt="" width="180">
 										</td>
-										<td style="text-align: center;" id="active-${objAdvs.id}">
-											<a href="javascript:void(0);" onclick="return setActive(${objAdvs.id}, ${objAdvs.active})">
+										<td style="text-align: center;" id="active-${objQC.id}">
+											<a href="javascript:void(0);" onclick="return setActive(${objQC.id}, ${objQC.active})">
 											<c:choose>
-												<c:when test="${objAdvs.active == 1}">
+												<c:when test="${objQC.active == 1}">
 													<img src="${defines.publicUrl}/img/tick-circle.gif" alt="" />
 												</c:when>
 												<c:otherwise>
@@ -95,9 +90,9 @@
 										</td>
 										<td style="text-align: center;">
 											<p>
-												<a href="${pageContext.request.contextPath}/admincp/advs/edit/${objAdvs.id}"><span class="price">Sửa</span></a>
+												<a href="${pageContext.request.contextPath}/admin/quang-cao/edit/${objQC.id}"><span class="price">Sửa</span></a>
 												||
-												<a href="${pageContext.request.contextPath}/admincp/advs/del/${objAdvs.id}" onclick="return confirm('Bạn có muốn xóa...!')"><span class="price">Xóa</span></a>
+												<a href="${pageContext.request.contextPath}/admin/quang-cao/del/${objQC.id}" onclick="return confirm('Bạn có muốn xóa...!')"><span class="price">Xóa</span></a>
 											</p>
 										</td>
 									</tr>   
@@ -106,20 +101,20 @@
 							<div class="col-lg-12 col-md-6 col-sm-6">
                             <div class="pagination">
                             	<c:if test="${page>1}">
-                            		<a href="${pageContext.request.contextPath}/admincp/advs?page=${page-1}"><div class="previous"><i class="icons icon-left-dir"></i></div></a>
+                            		<a href="${pageContext.request.contextPath}/admin/advs?page=${page-1}"><div class="previous"><i class="icons icon-left-dir"></i></div></a>
                             	</c:if>
                             	<c:forEach var="i" begin="1" end="${sumPage}" >
                                 	<c:choose>
                             			<c:when test="${page==i}">
-                            				<a class="active-page" href="${pageContext.request.contextPath}/admincp/advs?page=${i}"><div class="page-button">${i}</div></a>
+                            				<a class="active-page" href="${pageContext.request.contextPath}/admin/advs?page=${i}"><div class="page-button">${i}</div></a>
                             			</c:when>
                             			<c:otherwise>
-                            			<a href="${pageContext.request.contextPath}/admincp/advs?page=${i}"><div class="page-button">${i}</div></a>
+                            			<a href="${pageContext.request.contextPath}/admin/advs?page=${i}"><div class="page-button">${i}</div></a>
                             			</c:otherwise>
                             		</c:choose>
                                 </c:forEach>
                                 <c:if test="${page<sumPage}">
-                           			<a href="${pageContext.request.contextPath}/admincp/advs?page=${page+1}"><div class="next"><i class="icons icon-right-dir"></i></div></a>
+                           			<a href="${pageContext.request.contextPath}/admin/advs?page=${page+1}"><div class="next"><i class="icons icon-right-dir"></i></div></a>
                            		</c:if>
                             </div>
                         </div>
@@ -133,7 +128,7 @@
 <script type="text/javascript">
 function setActive(id, active){
 	$.ajax({
-		url: '${pageContext.request.contextPath}/admincp/advs/set-active',
+		url: '${pageContext.request.contextPath}/admin/quang-cao/set-active',
 		type: 'POST',
 		cache: false,
 		data: {

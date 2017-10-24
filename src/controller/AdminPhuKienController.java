@@ -1,9 +1,9 @@
 package controller;
 
 import java.io.File;
-import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +20,7 @@ import dao.LoaiSanPhamDao;
 import dao.PhuKienDao;
 import defines.Defines;
 import entities.LoaiSanPham;
+import entities.NguoiDung;
 import entities.PhuKien;
 import entities.SanPham;
 import utils.RenameFileUtils;
@@ -45,13 +46,21 @@ public class AdminPhuKienController {
 	}
 
 	@ModelAttribute
-	public void addCommon(ModelMap modelMap, Principal principal) {
+	public void addCommon(ModelMap modelMap, HttpSession session) {
 		modelMap.addAttribute("defines", defines);
 		modelMap.addAttribute("slug", slug);
+		NguoiDung admin = (NguoiDung) session.getAttribute("admin");
+		modelMap.addAttribute("userImfor", admin);
 	}
 
 	@RequestMapping(value = "")
-	public String index(ModelMap modelMap, @RequestParam(value = "page", defaultValue = "1") int page) {
+	public String index(ModelMap modelMap, @RequestParam(value = "page", defaultValue = "1") int page, HttpSession session) {
+		
+		// kiểm tra login
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
+				
 		PhuKienDao phuKienDao = new PhuKienDao();
 		modelMap.addAttribute("listPK", phuKienDao.getItems());
 		return "admin.phu_kien.index";
@@ -59,7 +68,13 @@ public class AdminPhuKienController {
 
 	// show-edit
 	@RequestMapping(value = "edit/{id}")
-	public String edit(ModelMap modelMap, @PathVariable("id") int id) {
+	public String edit(ModelMap modelMap, @PathVariable("id") int id, HttpSession session) {
+		
+		// kiểm tra login
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
+		
 		PhuKienDao phuKienDao = new PhuKienDao();
 		modelMap.addAttribute("objPK", phuKienDao.getItem(id));
 		modelMap.addAttribute("listLSP", loaiSanPhamDao.getItems());
@@ -124,7 +139,13 @@ public class AdminPhuKienController {
 	
 	// show-add
 	@RequestMapping(value = "add")
-	public String add(ModelMap modelMap) {
+	public String add(ModelMap modelMap, HttpSession session) {
+		
+		// kiểm tra login
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
+		
 		modelMap.addAttribute("listLSP", loaiSanPhamDao.getItems());
 		return "admin.phu_kien.add";
 	}
@@ -175,7 +196,13 @@ public class AdminPhuKienController {
 	// xóa
 	// delItem
 	@RequestMapping(value="del/{id}")
-	public String del(@PathVariable("id") int id, HttpServletRequest request){
+	public String del(@PathVariable("id") int id, HttpServletRequest request, HttpSession session){
+		
+		// kiểm tra login
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
+		
 		PhuKienDao phuKienDao = new PhuKienDao();
 		PhuKien pk = phuKienDao.getItem(id);
 		if (pk != null){

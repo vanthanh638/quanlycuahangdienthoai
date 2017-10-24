@@ -161,19 +161,18 @@
 <%-- <script defer src="${defines.publicUrl}/js/add-cart.js"></script> --%>
 
 <script type="text/javascript">
-	function addCart(name, hinh_anh, giaC) {
+	function addCart(id, giaC) {
 		var number = 1;
 		number = $('#item_number').val();
-		/* alert(number); */
-
-		/* alert('${pageContext.request.contextPath}/addCart'); */
+		/* alert(number);
+ */
+		/* alert('${pageContext.request.contextPath}/addCart') */
 		$.ajax({
 			url : '${pageContext.request.contextPath}/addCart',
 			type : 'POST',
 			cache : false,
 			data : {
-				san_pham : name,
-				picture : hinh_anh,
+				idsp : id,
 				gia : giaC,
 				so_luong : number
 			},
@@ -182,6 +181,7 @@
 				$.notify("Đã thêm sản phẩm vào giỏ hàng", "success");
 			},
 			error : function() {
+				/* alert('${pageContext.request.contextPath}/addCart') */
 				alert('Có lỗi xảy ra');
 			}
 		});

@@ -1,6 +1,6 @@
 package controller;
 
-import java.security.Principal;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +17,7 @@ import defines.Defines;
 import entities.NguoiDung;
 import entities.VaiTro;
 import utils.SlugUtils;
+import utils.StringUtils;
 
 @Controller
 @RequestMapping(value = "admin/user")
@@ -27,6 +28,9 @@ public class AdminNguoiDungController {
 
 	@Autowired
 	private SlugUtils slug;
+	
+	@Autowired
+	private StringUtils stringUtils;
 
 	private NguoiDungDao nguoiDungDao;
 	private VaiTroDao vaiTroDao;
@@ -37,20 +41,31 @@ public class AdminNguoiDungController {
 	}
 
 	@ModelAttribute
-	public void addCommon(ModelMap modelMap, Principal principal) {
+	public void addCommon(ModelMap modelMap, HttpSession session) {
 		modelMap.addAttribute("defines", defines);
 		modelMap.addAttribute("slug", slug);
+		NguoiDung admin = (NguoiDung) session.getAttribute("admin");
+		modelMap.addAttribute("userImfor", admin);
 	}
 
 	@RequestMapping(value = "")
-	public String index(ModelMap modelMap, @RequestParam(value = "page", defaultValue = "1") int page) {
+	public String index(ModelMap modelMap, @RequestParam(value = "page", defaultValue = "1") int page, HttpSession session) {
+		// kiểm tra login
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
 		modelMap.addAttribute("listNguoiDung", nguoiDungDao.getItems());
+		System.out.println();
 		return "admin.user.index";
 	}
 
 	// show-add
 	@RequestMapping(value = "add")
-	public String add(ModelMap modelMap) {
+	public String add(ModelMap modelMap, HttpSession session) {
+		// kiểm tra login
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
 		modelMap.addAttribute("listVaiTro", vaiTroDao.getItems());
 		return "admin.user.add";
 	}
@@ -61,6 +76,11 @@ public class AdminNguoiDungController {
 		System.out.println("id vai tro: " + id_vaitro);
 		VaiTro vaiTro = vaiTroDao.getItem(id_vaitro);
 		nguoiDung.setVaitro(vaiTro);
+		
+		// mã hóa password
+		String passMd5 = stringUtils.md5(nguoiDung.getMatkhau());
+		nguoiDung.setMatkhau(passMd5);
+		
 		System.out.println("Ten Vai tro: "+nguoiDung.getVaitro().getTenvaitro());
 		if (nguoiDungDao.addItem(nguoiDung) != null) {
 			return "redirect:/admin/user?msg=addOK"; 
@@ -71,7 +91,13 @@ public class AdminNguoiDungController {
 	
 	// show-edit
 	@RequestMapping(value="edit/{id}")
-	public String edit(ModelMap modelMap, @PathVariable("id") int id){
+	public String edit(ModelMap modelMap, @PathVariable("id") int id, HttpSession session){
+		
+		// kiểm tra login
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
+		
 		modelMap.addAttribute("listVaiTro", vaiTroDao.getItems());
 		modelMap.addAttribute("nguoidung", nguoiDungDao.getItem(id));
 		return "admin.user.edit";
@@ -90,7 +116,9 @@ public class AdminNguoiDungController {
 		
 		if ("".equals(nguoiDung.getMatkhau())) {
 			nguoiDung.setMatkhau(nd.getMatkhau());
-			
+		} else {
+			String passMd5 = stringUtils.md5(nguoiDung.getMatkhau());
+			nguoiDung.setMatkhau(passMd5);
 		}
 		if (nguoiDungDao.editItem(nguoiDung) != null) {
 			return "redirect:/admin/user?msg=addOK"; 
@@ -100,7 +128,13 @@ public class AdminNguoiDungController {
 	
 	// delete
 	@RequestMapping(value="del/{id}")
-	public String delete(@PathVariable("id") int id) {
+	public String delete(@PathVariable("id") int id, HttpSession session) {
+		
+		// kiểm tra login
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
+		
 		NguoiDung nd = nguoiDungDao.getItem(id);
 		if (nd == null) {
 			return "redirect:/admin/user?msg=delErr";

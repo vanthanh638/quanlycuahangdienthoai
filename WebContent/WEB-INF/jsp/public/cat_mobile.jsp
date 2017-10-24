@@ -19,17 +19,17 @@
 	                            
 	                            <div class="product-image">
 	                                <img src="${objDT.sanpham.hinhanh}" alt="" height="250">
-	                                <a href="${pageContext.request.contextPath}/mobile/${slug.makeSlug(objDT.id)}-m${objDT.sanpham.gia}" class="product-hover">
+	                                <a href="${pageContext.request.contextPath}/dien-thoai/${slug.makeSlug(objDT.sanpham.tensanpham)}-m${objDT.id}" class="product-hover">
 															<i class="icons icon-eye-1"></i> Xem ngay
 														</a>
 	                            </div>
 	                            
 	                            <div class="product-info">
-	                                <h5><a href="${pageContext.request.contextPath}/mobile/${slug.makeSlug(objDT.id)}-m${objDT.id}">${objDT.sanpham.tensanpham}</a></h5>
+	                                <h5><a href="${pageContext.request.contextPath}/dien-thoai/${slug.makeSlug(objDT.sanpham.tensanpham)}-m${objDT.id}">${objDT.sanpham.tensanpham}</a></h5>
 	                                <span class="price">${formatNumber.formatNumber(objDT.sanpham.gia)} VNĐ</span>
 	                            </div>
 	                            
-	                            <div class="product-actions" onClick="return addCart('${objDT.sanpham.id}', '${objDT.sanpham.hinhanh}', ${objDT.sanpham.gia})">
+	                            <div class="product-actions" onClick="return addCart(${objDT.sanpham.id}, ${objDT.sanpham.gia})">
 									<span class="add-to-cart" >
 										<span class="action-wrapper">
 											<input type="hidden" value="1" id="item_number">

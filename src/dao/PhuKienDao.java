@@ -11,11 +11,12 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 
+import defines.Defines;
 import entities.PhuKien;
 
 public class PhuKienDao {
 
-	private static String url = "http://192.168.1.3:8082/phukien";
+	private static String url = Defines.url + "phukien";
 	
 	public PhuKienDao() {
 		

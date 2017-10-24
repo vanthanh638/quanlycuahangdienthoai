@@ -11,12 +11,12 @@
                             </div>
                             
                             <div class="page-content">
-                            	<form action="${pageContext.request.contextPath}/admincp/slide/add" method="post" enctype="multipart/form-data">
+                            	<form action="${pageContext.request.contextPath}/admin/slide/add" method="post" enctype="multipart/form-data">
 	                            	<div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<form:errors path="objSlide.name" cssStyle="color:red"></form:errors>
+	                                    	<form:errors path="objSlide.ten" cssStyle="color:red"></form:errors>
 	                                    </div>	
 	                                </div>
 	                            	<div class="row">
@@ -24,7 +24,7 @@
 	                                    	<p>Tiêu đề</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="name" value="">
+	                                    	<input type="text" name="ten" value="">
 	                                    </div>	
 	                                </div>
 	                                

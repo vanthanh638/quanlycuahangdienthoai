@@ -1,9 +1,9 @@
 package controller;
 
 import java.io.File;
-import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,12 +21,12 @@ import dao.LoaiSanPhamDao;
 import defines.Defines;
 import entities.DienThoai;
 import entities.LoaiSanPham;
+import entities.NguoiDung;
 import entities.SanPham;
 import utils.RenameFileUtils;
 import utils.SlugUtils;
 
 @Controller
-
 @RequestMapping(value = "admin/mobile")
 public class AdminMobileController {
 
@@ -45,13 +45,19 @@ public class AdminMobileController {
 	}
 
 	@ModelAttribute
-	public void addCommon(ModelMap modelMap, Principal principal) {
+	public void addCommon(ModelMap modelMap, HttpSession session) {
 		modelMap.addAttribute("defines", defines);
 		modelMap.addAttribute("slug", slug);
+		NguoiDung admin = (NguoiDung) session.getAttribute("admin");
+		modelMap.addAttribute("userImfor", admin);
+//		System.out.println("Session: "+session.getAttribute("admin"));
 	}
 
 	@RequestMapping(value = "")
-	public String index(ModelMap modelMap, @RequestParam(value = "page", defaultValue = "1") int page) {
+	public String index(ModelMap modelMap, @RequestParam(value = "page", defaultValue = "1") int page, HttpSession session) {
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
 		DienThoaiDao dienThoaiDao = new DienThoaiDao();
 		modelMap.addAttribute("listDienThoai", dienThoaiDao.getItems());
 		return "admin.mobile.index";
@@ -59,7 +65,11 @@ public class AdminMobileController {
 
 	// show-edit
 	@RequestMapping(value = "edit/{id}")
-	public String edit(ModelMap modelMap, @PathVariable("id") int id) {
+	public String edit(ModelMap modelMap, @PathVariable("id") int id, HttpSession session) {
+		// kiểm tra login
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
 		DienThoaiDao dienThoaiDao = new DienThoaiDao();
 		modelMap.addAttribute("dienthoai", dienThoaiDao.getItem(id));
 		modelMap.addAttribute("listLSP", loaiSanPhamDao.getItems());
@@ -125,7 +135,11 @@ public class AdminMobileController {
 	
 	// show-add
 	@RequestMapping(value = "add")
-	public String add(ModelMap modelMap) {
+	public String add(ModelMap modelMap, HttpSession session) {
+		// kiểm tra login
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
 		modelMap.addAttribute("listLSP", loaiSanPhamDao.getItems());
 		return "admin.mobile.add";
 	}
@@ -176,7 +190,13 @@ public class AdminMobileController {
 	// xóa
 	// delItem
 	@RequestMapping(value="del/{id}")
-	public String del(@PathVariable("id") int id, HttpServletRequest request){
+	public String del(@PathVariable("id") int id, HttpServletRequest request, HttpSession session){
+		
+		// kiểm tra login
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
+		
 		DienThoaiDao dienThoaiDao = new DienThoaiDao();
 		
 		DienThoai dt = dienThoaiDao.getItem(id);

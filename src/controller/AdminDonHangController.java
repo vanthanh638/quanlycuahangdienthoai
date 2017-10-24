@@ -1,7 +1,5 @@
 package controller;
 
-import java.security.Principal;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import dao.DonHangDao;
 import defines.Defines;
+import entities.DonHang;
+import entities.NguoiDung;
 import utils.SlugUtils;
 
 @Controller
@@ -27,14 +27,20 @@ public class AdminDonHangController {
 	private SlugUtils slug;
 	
 	@ModelAttribute
-	public void addCommon(ModelMap modelMap, Principal principal) {
+	public void addCommon(ModelMap modelMap, HttpSession session) {
 		modelMap.addAttribute("defines", defines);
 		modelMap.addAttribute("slug", slug);
+		NguoiDung admin = (NguoiDung) session.getAttribute("admin");
+		modelMap.addAttribute("userImfor", admin);
 	}
 	
 
 	@RequestMapping(value = "")
-	public String index(ModelMap modelMap, @RequestParam(value = "page", defaultValue = "1") int page) {
+	public String index(ModelMap modelMap, @RequestParam(value = "page", defaultValue = "1") int page, HttpSession session) {
+		// Kiểm tra login
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
 		DonHangDao donHangDao = new DonHangDao();
 		modelMap.addAttribute("listDonHang", donHangDao.getItems());
 		return "admin.don_hang.index";
@@ -43,9 +49,33 @@ public class AdminDonHangController {
 	// Chi tiết đơn hàng
 	@RequestMapping("/chi-tiet-don-hang/{id}")
 	public String ctdon_hang(@PathVariable("id") int id, ModelMap modelMap, HttpSession session){
+		// kiểm tra login
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
 		DonHangDao donHangDao = new DonHangDao();
 		modelMap.addAttribute("id_dh", id);
 		modelMap.addAttribute("donhang", donHangDao.getItem(id));
 		return "admin.don_hang.detail";
+	}
+	
+	// Xóa đơn hàng
+	@RequestMapping(value="del/{id}")
+	public String del(@PathVariable("id") int id, HttpSession session){
+		// kiểm tra login
+		if (session.getAttribute("admin") == null) {
+			return "redirect:/admin/login";
+		}
+		DonHangDao donHangDao = new DonHangDao();
+		
+		DonHang dh = donHangDao.getItem(id);
+		if (dh != null){
+			if (donHangDao.delItem(id) > 0){
+				return "redirect:/admin/don-hang?msg=delOK";
+			} 
+			return "redirect:/admin/don-hang?msg=delErr";
+		}
+		
+		return "redirect:/admin/don-hang";
 	}
 }

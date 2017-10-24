@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import dao.DienThoaiDao;
+import dao.QuangCaoDao;
 import defines.Defines;
+import entities.DienThoai;
 import utils.FormatNumber;
 import utils.SlugUtils;
 
@@ -35,11 +38,9 @@ public class PublicDienThoaiController {
 	public void addCommon(ModelMap modelMap, HttpSession session){
 		modelMap.addAttribute("defines", defines);
 		modelMap.addAttribute("slug", slug);
-//		modelMap.addAttribute("listPro", producerDAO.getItems());
-//		modelMap.addAttribute("listLoaiPK", loaiPKDAO.getItems());
 		modelMap.addAttribute("formatNumber", formatNumber);
-//		modelMap.addAttribute("listAdvs", advsDAO.getItemsPagination(0, 3));
-//		modelMap.addAttribute("listBC", mobileDAO.getItemsBC());
+		QuangCaoDao quangCaoDao = new QuangCaoDao();
+		modelMap.addAttribute("listQC", quangCaoDao.getItems());
 	}
 	
 	@RequestMapping(value="")
@@ -67,12 +68,14 @@ public class PublicDienThoaiController {
 //		modelMap.addAttribute("listMobile", mobileDAO.getItemsPaginationByIDPro(id, offset, row_count));
 //		return "public.public.cat_mobile";
 //	}
-//	
-//	@RequestMapping(value="{slug}-m{id}")
-//	public String detail(ModelMap modelMap, @PathVariable("id") int id){
-//		mobileDAO.addRead(id);
-//		modelMap.addAttribute("objMobile", mobileDAO.getItem(id));
-//		return "public.public.detail_mobile";
-//	}
+	
+	@RequestMapping(value="{slug}-m{id}")
+	public String detail(ModelMap modelMap, @PathVariable("id") int id){
+		DienThoai obj = dienThoaiDao.getItem(id);
+		obj.getSanpham().setLuotxem(obj.getSanpham().getLuotxem() + 1);
+		dienThoaiDao.editItem(obj);
+		modelMap.addAttribute("objMobile", obj);
+		return "public.public.detail_mobile";
+	}
 	
 }

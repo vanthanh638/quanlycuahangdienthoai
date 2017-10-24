@@ -141,11 +141,13 @@
 							<section class="sidebar-slider">
 								<div class="sidebar-flexslider">
 									<ul class="slides">
-										<c:forEach items="${listAdvs}" var="objAdvs">
-											<li>
-												<a href="${objAdvs.link}"><img src="${pageContext.request.contextPath}/files/${objAdvs.picture}" alt="Slide1"/></a>
-												<br>
-											</li>
+										<c:forEach items="${listQC}" var="qc">
+											<c:if test="${qc.active == 1}">
+												<li>
+													<a href="${qc.lienket}"><img src="${pageContext.request.contextPath}/files/${qc.hinhanh}" alt="Slide1"/></a>
+													<br>
+												</li>
+											</c:if>
 										</c:forEach>
 										<%-- <li>
 											<a href="#"><img src="${defines.publicUrl}/img/sidebar-slide2.jpg" alt="Slide1"/></a>

@@ -11,11 +11,11 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 
+import defines.Defines;
 import entities.Slide;
-import entities.VaiTro;
 
 public class SlideDao {
-	private String url = "http://192.168.1.3:8082/slide";
+	private String url = Defines.url + "/slide";
 	private RestTemplate restTemplate;
 
 	public List<Slide> getItems() {
@@ -66,6 +66,31 @@ public class SlideDao {
 	    Gson gson = new Gson();
 	    slide = gson.fromJson(result, Slide.class);
 		
+		return slide;
+	}
+
+	// add
+	public Slide addItem(Slide slide) {
+		String uri = url + "/add";
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate = new RestTemplate();
+		Slide result = restTemplate.postForObject(uri, slide, Slide.class);
+		return result;
+	}
+	
+	// delete
+	public int delItem(int id) {
+		String uri = url + "/delete/" + id;
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.delete(uri);
+		return id;
+	}
+	
+	// update
+	public Slide editItem(Slide slide) {
+		String uri = url + "/update";
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.put(uri, slide);
 		return slide;
 	}
 

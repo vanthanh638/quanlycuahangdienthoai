@@ -63,7 +63,7 @@
 												<!-- 	<div class="rating readonly-rating" data-score="4"></div> -->
 												</div>
 												
-												<div class="product-actions" onClick="return addCart('${dienthoai.id}', '${dienthoai.sanpham.hinhanh}', ${dienthoai.sanpham.gia})">
+												<div class="product-actions" onClick="return addCart(${dienthoai.id}, ${dienthoai.sanpham.gia})">
 													<span class="add-to-cart" >
 														<span class="action-wrapper">
 															<input type="hidden" value="1" id="item_number">
@@ -132,7 +132,7 @@
 													<span class="price">${formatNumber.formatNumber(phukien.sanpham.gia)} VNĐ</span>
 												</div>
 												
-												<div class="product-actions" onclick="return addCart('${phukien.sanpham.tensanpham}', '${phukien.sanpham.hinhanh}', ${phukien.sanpham.gia})">
+												<div class="product-actions" onclick="return addCart(${phukien.sanpham.id}, ${phukien.sanpham.gia})">
 													<span class="add-to-cart">
 														<span class="action-wrapper">
 															<i class="icons icon-basket-2"></i>

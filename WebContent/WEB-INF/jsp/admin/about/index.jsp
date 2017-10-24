@@ -11,7 +11,7 @@
                             </div>
                             
                             <div class="page-content">
-                            	<form id="frmAbout" action="${pageContext.request.contextPath}/admincp" method="post">
+                            	<form id="frmAbout" action="${pageContext.request.contextPath}/admin" method="post">
 	                            	<c:if test="${param['msg'] eq 'editOK'}">
 	                            		<div class="row">
 	                            			<div class="col-lg-12 col-md-12 col-sm-12">
@@ -24,7 +24,7 @@
 	                                    	<p>Tiêu đề</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<input type="text" name="title" value="${objAbout.title}">
+	                                    	<input type="text" name="tieude" value="${objAbout.tieude}">
 	                                    </div>	
 	                                </div>
 	                                
@@ -33,7 +33,7 @@
 	                                    	<p>Chi tiết</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-											<textarea rows="" cols="" name="content" class="content">${objAbout.content}</textarea>
+											<textarea rows="" cols="" name="noidung" class="content">${objAbout.noidung}</textarea>
 	                                    </div>	
 	                                </div>
 	                                
@@ -52,7 +52,7 @@
                     
 				</section>
 <script type="text/javascript">
-	CKEDITOR.replace( 'content',
+	CKEDITOR.replace( 'noidung',
 		{
 			filebrowserBrowseUrl : '/mobileShop/templates/public/ckfinder/ckfinder.html',
 			filebrowserImageBrowseUrl : '/mobileShop/templates/public/ckfinder/ckfinder.html?type=Images',

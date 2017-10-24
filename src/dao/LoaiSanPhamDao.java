@@ -11,10 +11,11 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 
+import defines.Defines;
 import entities.LoaiSanPham;
 
 public class LoaiSanPhamDao {
-	private String url = "http://192.168.1.3:8082/loaisanpham";
+	private String url = Defines.url + "loaisanpham";
 
 	public List<LoaiSanPham> getItems() {
 		String uri = url;

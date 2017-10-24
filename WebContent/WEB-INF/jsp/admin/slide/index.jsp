@@ -56,7 +56,7 @@
                     	 </div>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                         	<div class="add-green">
-								<a href="${pageContext.request.contextPath}/admincp/slide/add">
+								<a href="${pageContext.request.contextPath}/admin/slide/add">
 									Thêm slide
 								</a>
 							</div>
@@ -64,7 +64,6 @@
 							<table class="order-table">
                             	
 								<tr>
-									<th style="text-align: center;">ID</th>
 									<th style="text-align: center;">Tiêu đề</th>
 									<th style="text-align: center;" width="200">Hình ảnh</th>
 									<th style="text-align: center;"> Kích hoạt</th>
@@ -72,10 +71,9 @@
 								</tr>
 								<c:forEach items="${listSlide}" var="objSlide">
 									<tr>
-										<td><p>${objSlide.id}</p></td>
-										<td class="order-number"><p><a href="#">${objSlide.name}</a></p>
+										<td class="order-number"><p><a href="#">${objSlide.ten}</a></p>
 										<td>
-											<img src="${pageContext.request.contextPath}/files/${objSlide.picture}" alt="" width="180">
+											<img src="${pageContext.request.contextPath}/files/${objSlide.hinhanh}" alt="" width="180">
 										</td>
 										<td style="text-align: center;" id="active-${objSlide.id}">
 											<a href="javascript:void(0);" onclick="return setActive(${objSlide.id}, ${objSlide.active})">
@@ -91,9 +89,9 @@
 										</td>
 										<td style="text-align: center;">
 											<p>
-												<a href="${pageContext.request.contextPath}/admincp/slide/edit/${objSlide.id}"><span class="price">Sửa</span></a>
+												<a href="${pageContext.request.contextPath}/admin/slide/edit/${objSlide.id}"><span class="price">Sửa</span></a>
 												||
-												<a href="${pageContext.request.contextPath}/admincp/slide/del/${objSlide.id}" onclick="return confirm('Bạn có muốn xóa...!')"><span class="price">Xóa</span></a>
+												<a href="${pageContext.request.contextPath}/admin/slide/del/${objSlide.id}" onclick="return confirm('Bạn có muốn xóa...!')"><span class="price">Xóa</span></a>
 											</p>
 										</td>
 									</tr>   
@@ -102,20 +100,20 @@
 							<div class="col-lg-12 col-md-6 col-sm-6">
                             <div class="pagination">
                             	<c:if test="${page>1}">
-                            		<a href="${pageContext.request.contextPath}/admincp/slide?page=${page-1}"><div class="previous"><i class="icons icon-left-dir"></i></div></a>
+                            		<a href="${pageContext.request.contextPath}/admin/slide?page=${page-1}"><div class="previous"><i class="icons icon-left-dir"></i></div></a>
                             	</c:if>
                             	<c:forEach var="i" begin="1" end="${sumPage}" >
                                 	<c:choose>
                             			<c:when test="${page==i}">
-                            				<a class="active-page" href="${pageContext.request.contextPath}/admincp/slide?page=${i}"><div class="page-button">${i}</div></a>
+                            				<a class="active-page" href="${pageContext.request.contextPath}/admin/slide?page=${i}"><div class="page-button">${i}</div></a>
                             			</c:when>
                             			<c:otherwise>
-                            			<a href="${pageContext.request.contextPath}/admincp/slide?page=${i}"><div class="page-button">${i}</div></a>
+                            			<a href="${pageContext.request.contextPath}/admin/slide?page=${i}"><div class="page-button">${i}</div></a>
                             			</c:otherwise>
                             		</c:choose>
                                 </c:forEach>
                                 <c:if test="${page<sumPage}">
-                           			<a href="${pageContext.request.contextPath}/admincp/slide?page=${page+1}"><div class="next"><i class="icons icon-right-dir"></i></div></a>
+                           			<a href="${pageContext.request.contextPath}/admin/slide?page=${page+1}"><div class="next"><i class="icons icon-right-dir"></i></div></a>
                            		</c:if>
                             </div>
                         </div>
@@ -129,7 +127,7 @@
 <script type="text/javascript">
 function setActive(id, active){
 	$.ajax({
-		url: '${pageContext.request.contextPath}/admincp/slide/set-active',
+		url: '${pageContext.request.contextPath}/admin/slide/set-active',
 		type: 'POST',
 		cache: false,
 		data: {

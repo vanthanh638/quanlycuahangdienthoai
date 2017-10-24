@@ -11,10 +11,11 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 
+import defines.Defines;
 import entities.NguoiDung;
 
 public class NguoiDungDao {
-	private String url = "http://192.168.1.3:8082/nguoidung";
+	private String url = Defines.url + "nguoidung";
 
 	public List<NguoiDung> getItems() {
 		String uri = url;
@@ -89,6 +90,35 @@ public class NguoiDungDao {
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.delete(uri);
 		return id;
+	}
+
+	public NguoiDung getByUsername(String tendangnhap) {
+		String uri = url + "/getbyusername/" + tendangnhap;
+		System.out.println(uri);
+		RestTemplate restTemplate = new RestTemplate();
+		
+		NguoiDung nguoiDung = null;
+		
+		// Chuỗi json
+		String result = restTemplate.getForObject(uri, String.class);
+		
+		
+		try {
+			JSONParser jsonParser = new JSONParser();
+			
+			// 2. Parser chuỗi JSON về một JSONArray
+			JSONArray jsonArray;
+			jsonArray = (JSONArray) jsonParser.parse(result);
+			
+			JSONObject jsonObject = (JSONObject) jsonArray.get(0);
+			
+			Gson gson = new Gson();
+			nguoiDung = gson.fromJson(jsonObject.toString(), NguoiDung.class);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return nguoiDung;
 	}
 
 }
