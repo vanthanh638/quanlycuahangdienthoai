@@ -105,7 +105,7 @@
 		                            <div class="page-content">
 		                            	<c:choose>
 		                            	<c:when test="${param['msg'] eq 'creatOK'}">
-		                            		<p>Bạn đã đăng ký thành công, mời bạn đăng nhập để tiếp tục</p>
+		                            		<p style="color: blue">Bạn đã đăng ký thành công, mời bạn đăng nhập để tiếp tục</p>
 		                            		<br>
 		                            	</c:when>
 		                            	<c:otherwise>
@@ -177,7 +177,7 @@
 			                                    	<p>Tài khoản (*)</p>
 			                                    </div>
 			                                    <div class="col-lg-9 col-md-9 col-sm-9">
-			                                    	<input type="text" name="username">
+			                                    	<input type="text" name="tendangnhap">
 			                                    </div>	
 			                                </div>
 			                                <br>
@@ -187,7 +187,7 @@
 			                                    	<p>Password (*)</p>
 			                                    </div>
 			                                    <div class="col-lg-9 col-md-9 col-sm-9">
-			                                    	<input type="password" name="password" id="password">
+			                                    	<input type="password" name="matkhau" id="password">
 			                                    </div>	
 			                                </div>
 			                                
@@ -207,7 +207,7 @@
 			                                    	<p>Họ tên(*)</p>
 			                                    </div>
 			                                    <div class="col-lg-9 col-md-9 col-sm-9">
-			                                    	<input type="text" name="fullname">
+			                                    	<input type="text" name="tendaydu">
 			                                    </div>	
 			                                </div>
 			                                
@@ -217,7 +217,7 @@
 			                                    	<p>Địa chỉ</p>
 			                                    </div>
 			                                    <div class="col-lg-9 col-md-9 col-sm-9">
-			                                    	<input type="text" name="address">
+			                                    	<input type="text" name="diachi">
 			                                    </div>	
 			                                </div>
 			                                
@@ -227,7 +227,15 @@
 			                                    	<p>Điện thoại</p>
 			                                    </div>
 			                                    <div class="col-lg-9 col-md-9 col-sm-9">
-			                                    	<input type="text" name="phone">
+			                                    	<input type="text" name="sodienthoai">
+			                                    </div>	
+			                                </div>
+			                                <div class="row">
+			                                    <div class="col-lg-3 col-md-3 col-sm-3">
+			                                    	<p>Email</p>
+			                                    </div>
+			                                    <div class="col-lg-9 col-md-9 col-sm-9">
+			                                    	<input type="email" name="email">
 			                                    </div>	
 			                                </div>
 			                                

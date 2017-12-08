@@ -45,7 +45,7 @@ public class AdminIndexController {
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.POST)
-	public String index(ModelMap modelMap, @ModelAttribute("objAbout") GioiThieu objAbout, HttpSession session){
+	public String index(@ModelAttribute("objAbout") GioiThieu objAbout, HttpSession session){
 		
 		if (session.getAttribute("admin") == null) {
 			return "redirect:/admin/login";

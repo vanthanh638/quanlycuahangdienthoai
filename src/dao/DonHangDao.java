@@ -74,10 +74,13 @@ public class DonHangDao {
 
 	// add
 	public DonHang addItem(DonHang donHang) {
+		System.out.println("Them: "+donHang.getChiTietDonHangs().size());
 		String uri = url + "/add";
+		System.out.println("Url : " + uri);
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate = new RestTemplate();
 		DonHang result = restTemplate.postForObject(uri, donHang, DonHang.class);
+		
 		return result;
 	}
 

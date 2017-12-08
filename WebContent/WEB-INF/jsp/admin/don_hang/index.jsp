@@ -63,11 +63,19 @@
 													<td>
 														${objDonHang.thanhToan.ten}
 													</td>
-													<td>
-														${objDonHang.trangthai}
+													<td id="tt-${objDonHang.id}">
+														<c:choose>
+															<c:when test="${objDonHang.trangthai == 0}">
+																<a href="javascript:void(0);" onclick="return xacnhan('${objDonHang.id}')"><span class="price small">Xác nhận</span></a>
+															</c:when>
+															<c:otherwise>
+																<a  href="javascript:void(0);"><span class="price small">Đã xác nhận</span></a>
+															</c:otherwise>
+														</c:choose>
+														
 													</td>
 													<td>
-														<a href="${pageContext.request.contextPath}/admin/don-hang/chi-tiet-don-hang/${objDonHang.id}"><span class="price big">Chi tiết</span></a>
+														<a href="${pageContext.request.contextPath}/admin/don-hang/chi-tiet-don-hang/${objDonHang.id}"><span class="price small">Chi tiết</span></a>
 														||
 														<a href="${pageContext.request.contextPath}/admin/don-hang/del/${objDonHang.id}" onclick="return confirm('Bạn có muốn xóa...!')"><span class="price">Xóa</span></a>
 													</td> 
@@ -102,3 +110,24 @@
                     </div>
                     </div>
 				</section>
+				
+<script type="text/javascript">
+function xacnhan(id){
+	$.ajax({
+		url: '${pageContext.request.contextPath}/admin/don-hang/xac-nhan',
+		type: 'POST',
+		cache: false,
+		data: {
+			did: id, 
+		},
+		success: function(data){
+			
+			$("#tt-" + id).html(data);
+		},
+		error: function (){
+			alert('Có lỗi xảy ra');
+		}
+	});
+	return false;
+}
+</script>

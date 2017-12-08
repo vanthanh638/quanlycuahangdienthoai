@@ -12,6 +12,15 @@
                             
                             <div class="page-content">
                             	<form action="${pageContext.request.contextPath}/admin/mobile/edit/${dienthoai.id}" method="post" enctype="multipart/form-data">
+	                            	<!-- validate ten sp -->
+	                            	<div class="row">
+	                                    <div class="col-lg-3 col-md-3 col-sm-3">
+	                                    </div>
+	                                    <div class="col-lg-9 col-md-9 col-sm-9">
+	                                    	<form:errors path="sanpham.tensanpham" cssStyle="color:red"></form:errors>
+	                                    </div>	
+	                                </div>
+	                                <!--  -->
 	                            	<div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    	<p>Tên điện thoại</p>
@@ -58,6 +67,15 @@
 	                                    </div>	
 	                                </div>
 	                                
+	                                <!-- validate gia -->
+	                                <div class="row">
+	                                    <div class="col-lg-3 col-md-3 col-sm-3">
+	                                    </div>
+	                                    <div class="col-lg-9 col-md-9 col-sm-9">
+	                                    	<form:errors path="sanpham.gia" cssStyle="color:red"></form:errors>
+	                                    </div>	
+	                                </div>
+	                                <!--  -->
 	                                <div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    	<p>Giá</p>

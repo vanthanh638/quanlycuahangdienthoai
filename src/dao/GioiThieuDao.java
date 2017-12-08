@@ -9,7 +9,7 @@ import entities.GioiThieu;
 
 public class GioiThieuDao {
 
-	private static String url = Defines.url + "/gioithieu";
+	private static String url = Defines.url + "gioithieu";
 	
 	public GioiThieu getItem() {
 		String uri = url;
@@ -25,6 +25,7 @@ public class GioiThieuDao {
 
 	public GioiThieu editItem(GioiThieu objAbout) {
 		String uri = url + "/edit";
+		System.out.println(uri);
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.put(uri, objAbout);
 		return objAbout;

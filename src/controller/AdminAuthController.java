@@ -46,8 +46,6 @@ public class AdminAuthController {
 		NguoiDung nguoiDung = nguoiDungDao.getByUsername(username);
 		if (nguoiDung != null) {
 			if (nguoiDung.getMatkhau().equals(stringUtils.md5(password))) {
-				System.out.println("username: " + nguoiDung.getTendangnhap());
-				System.out.println("password: " + nguoiDung.getMatkhau());
 				session.setAttribute("admin", nguoiDung);
 				return "redirect:/admin/user";
 			}

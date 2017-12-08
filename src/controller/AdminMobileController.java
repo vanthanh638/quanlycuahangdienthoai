@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.portlet.ModelAndView;
 
 import dao.DienThoaiDao;
 import dao.LoaiSanPhamDao;
@@ -78,10 +80,12 @@ public class AdminMobileController {
 
 	// xử lý edit
 	@RequestMapping(value = "edit/{id}", method = RequestMethod.POST)
-	public String edit(@ModelAttribute("dienThoai") DienThoai dienThoai, @ModelAttribute("sanpham") SanPham sanpham,
+	public String edit(@Valid @ModelAttribute("dienThoai") DienThoai dienThoai,@Valid @ModelAttribute("sanpham") SanPham sanpham,
 			BindingResult bindingResult, @RequestParam("hinhanh_add") CommonsMultipartFile cmf,
 			HttpServletRequest request, @RequestParam("id_loaisp") int id_loaisp, @PathVariable("id") int id) {
-		
+		if (bindingResult.hasErrors()) {
+			return "admin.mobile.edit";
+		}
 		DienThoaiDao dienThoaiDao = new DienThoaiDao();
 		
 		LoaiSanPham loaiSanPham = loaiSanPhamDao.getItem(id_loaisp);
@@ -146,12 +150,14 @@ public class AdminMobileController {
 	
 	// addItem
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String add(@ModelAttribute("dienThoai") DienThoai dienThoai, @ModelAttribute("sanpham") SanPham sanpham,
+	public String add(ModelMap modelMap,@Valid @ModelAttribute("dienThoai") DienThoai dienThoai,@Valid @ModelAttribute("sanpham") SanPham sanpham,
 			BindingResult bindingResult, @RequestParam("hinhanh_add") CommonsMultipartFile cmf,
 			HttpServletRequest request, @RequestParam("id_loaisp") int id_loaisp) {
-		System.out.println(dienThoai.getBangtan());
-		System.out.println("Ten san pham" + sanpham.getTensanpham());
-		
+		if(bindingResult.hasErrors()) {
+			modelMap.addAttribute("listLSP", loaiSanPhamDao.getItems());
+			modelMap.addAttribute("dienthoai", dienThoai);
+			return "admin.mobile.add";
+		}
 		DienThoaiDao dienThoaiDao = new DienThoaiDao();
 		
 		LoaiSanPham loaiSanPham = loaiSanPhamDao.getItem(id_loaisp);

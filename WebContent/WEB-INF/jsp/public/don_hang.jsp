@@ -32,6 +32,7 @@
 												<th>Địa chỉ</th>
 												<th>Ngày tạo</th>
 												<th>HT thanh toán</th>
+												<th>Trạng thái</th>
 												<th>Chi tiết</th>
 											</tr> 
 											<c:forEach items="${donHang}" var="objDonHang">
@@ -47,6 +48,18 @@
 													</td>
 													<td>
 														${objDonHang.thanhToan.ten}
+													</td>
+													<td>
+														<c:choose>
+															<c:when test="${objDonHang.trangthai == 0}">
+																Chưa xác nhận
+															</c:when>
+															<c:otherwise>
+																Đã xác nhận
+															</c:otherwise>
+														</c:choose>
+														
+														
 													</td>
 													<td>
 														<a href="${pageContext.request.contextPath}/chi-tiet-don-hang/${objDonHang.id}"><span class="price big">Chi tiết</span></a>

@@ -1,7 +1,7 @@
 $(document).ready(function() {
-	$("#frmMobile").validate({
+	/*$("#frmMobile").validate({
 		rules:{
-			"name_mobile":{
+			"tensanpham":{
 				required: true,
 			},
 			"gia":{
@@ -9,14 +9,14 @@ $(document).ready(function() {
 			},
 		},
 		messages:{
-			"name_mobile":{
+			"tensanpham":{
 				required: "<span style=\"color:red\" >  Tên không được để trống..! </span>",
 			},
 			"gia":{
 				required: "<span style=\"color:red\" >  Giá không được để trống..! </span>",
 			},
 		},
-	});
+	});*/
 	$("#frmProducer").validate({
 		rules:{
 			"name_pro":{
@@ -31,18 +31,18 @@ $(document).ready(function() {
 	});
 	$("#contact-form").validate({
 		rules:{
-			"name":{
+			"tendaydu":{
 				required: true,
 			},
-			"phone":{
+			"sodienthoai":{
 				required: true,
 			},
 		},
 		messages:{
-			"name":{
+			"tendaydu":{
 				required: "<span style=\"color:red\" >  Nhập họ tên </span>",
 			},
-			"phone":{
+			"sodienthoai":{
 				required: "<span style=\"color:red\" >  Nhập số điện thoại </span>",
 			},
 		},
@@ -67,32 +67,32 @@ $(document).ready(function() {
 	});
 	$("#frm-add-account").validate({
 		rules:{
-			"username":{
+			"tendangnhap":{
 				required: true,
 			},
-			"password":{
+			"matkhau":{
 				required: true,
 			},
 			"re_password":{
 				required: true,
 				equalTo: "#password",
 			},
-			"fullname":{
+			"tendaydu":{
 				required: true,
 			},
 		},
 		messages:{
-			"username":{
+			"tendangnhap":{
 				required: "<span style=\"color:red\" >  Nhập username </span>",
 			},
-			"password":{
+			"matkhau":{
 				required: "<span style=\"color:red\" >  Nhập password </span>",
 			},
 			"re_password":{
 				required: "<span style=\"color:red\" >  Nhập password </span>",
 				equalTo: "<span style=\"color:red\" >  password phải trùng với password ở trên </span>",
 			},
-			"fullname":{
+			"tendaydu":{
 				required: "<span style=\"color:red\" >  Nhập họ tên </span>",
 			},
 		}
@@ -135,3 +135,8 @@ $(document).ready(function() {
 	});
 	
 });
+
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}

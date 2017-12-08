@@ -1,7 +1,7 @@
 package controller;
 
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import dao.ChiTietDonHangDao;
 import dao.DienThoaiDao;
 import dao.DonHangDao;
 import dao.GioiThieuDao;
@@ -25,6 +26,7 @@ import dao.QuangCaoDao;
 import dao.SanPhamDao;
 import dao.SlideDao;
 import dao.ThanhToanDao;
+import dao.VaiTroDao;
 import defines.Defines;
 import entities.Cart;
 import entities.ChiTietDonHang;
@@ -32,6 +34,7 @@ import entities.DonHang;
 import entities.NguoiDung;
 import entities.SanPham;
 import entities.ThanhToan;
+import entities.VaiTro;
 import utils.FormatNumber;
 import utils.SlugUtils;
 import utils.StringUtils;
@@ -43,6 +46,9 @@ public class PublicIndexController {
 	
 	@Autowired
 	private SlugUtils slug;
+	
+	@Autowired
+	private StringUtils stringUtils;
 	
 	@Autowired
 	private FormatNumber formatNumber;
@@ -148,6 +154,7 @@ public class PublicIndexController {
 		return "public.public.thanh-toan";
 	}
 
+	// dang nhap
 	@RequestMapping(value="account", method=RequestMethod.POST)
 	public String login(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session){
 		System.out.println("ten dang nhap" + username);
@@ -176,14 +183,15 @@ public class PublicIndexController {
 	
 	// đặt hàng
 	@RequestMapping("/add-don-hang-ht{id}")
-	public String adđonHang(HttpSession session, @PathVariable("id") int id_ht_tt){
+	public String addonHang(HttpSession session, @PathVariable("id") int id_ht_tt){
 		NguoiDung nguoiDung = (NguoiDung) session.getAttribute("objUser");
 		ThanhToan thanhToan = new ThanhToanDao().getItem(id_ht_tt);
 		Cart objCart = (Cart) session.getAttribute("cart");
 		List<ChiTietDonHang> chiTietDonHangs = objCart.getCart();
-		Date date = new Date();
-		String dateStr = date.toString();
-		DonHang objDonHang = new DonHang(0, nguoiDung.getTendaydu(), nguoiDung.getDiachi(), nguoiDung.getSodienthoai(), dateStr, 0, chiTietDonHangs, nguoiDung, thanhToan);
+		for (ChiTietDonHang chiTietDonHang : chiTietDonHangs) {
+			chiTietDonHang.setId(0);
+		}
+		DonHang objDonHang = new DonHang(0, nguoiDung.getTendaydu(), nguoiDung.getDiachi(), nguoiDung.getSodienthoai(), null, 0, chiTietDonHangs, nguoiDung, thanhToan);
 		
 		DonHangDao donHangDAO = new DonHangDao();
 		if (donHangDAO.addItem(objDonHang) != null){
@@ -193,6 +201,7 @@ public class PublicIndexController {
 //				product.setId_don_hang(id_donhang);
 //				productDAO.addItem(product);
 //			}
+			session.removeAttribute("cart");
 			return "redirect:/don-hang-c" + nguoiDung.getId();
 		}
 		return "public.ngan_luong";
@@ -212,5 +221,36 @@ public class PublicIndexController {
 	public String ctdon_hang(@PathVariable("id") int id, ModelMap modelMap, HttpSession session){
 		modelMap.addAttribute("donhang", new DonHangDao().getItem(id));
 		return "public.public.chi_tiet_don_hang";
+	}
+	
+	@RequestMapping(value = "dang-ky", method = RequestMethod.POST)
+	public String dangKy(@ModelAttribute("nguoiDung") NguoiDung nguoiDung) {
+		VaiTroDao vaiTroDao = new VaiTroDao();
+		VaiTro vaitro = vaiTroDao.getItem(3);
+		nguoiDung.setVaitro(vaitro);
+		
+		String passMd5 = stringUtils.md5(nguoiDung.getMatkhau());
+		nguoiDung.setMatkhau(passMd5);
+		
+		NguoiDungDao nguoiDungDao = new NguoiDungDao();
+		if (nguoiDungDao.addItem(nguoiDung) != null) {
+			return "redirect:/account?msg=creatOK"; 
+		} 
+		return "redirect:/account";
+	}
+	
+	// cap nhat don hang
+	@RequestMapping(value="cap-nhat-don-hang/{id}/{array}")
+	public String capNhapDonHang(@PathVariable("array") int[] array_sl, HttpSession session, @PathVariable("id") int id){
+		ChiTietDonHangDao chiTietDonHangDao = new ChiTietDonHangDao();
+		DonHang donHang = new DonHangDao().getItem(id);
+		
+		List<ChiTietDonHang> list = donHang.getChiTietDonHangs();
+		for (int i = 0; i < list.size(); i++) {
+			ChiTietDonHang chiTietDonHang = list.get(i);
+			chiTietDonHang.setSoluong(array_sl[i]);
+			chiTietDonHangDao.udateItem(chiTietDonHang);
+		}
+		return "redirect:/chi-tiet-don-hang/"+id;
 	}
 }

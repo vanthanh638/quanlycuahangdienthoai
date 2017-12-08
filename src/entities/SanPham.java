@@ -1,14 +1,31 @@
 package entities;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
+
 public class SanPham {
 
 	private int id;
+	
+	@NotEmpty(message="Tên sản phẩm không được để trống")
 	private String tensanpham;
 	private String hinhanh;
 	private LoaiSanPham loaiSanPham;
 	private int luotxem;
+	
 	private int soluongdaban;
+	
+//	@NotNull(message="Giá không được trống") 
+//	@NumberFormat(style = Style.NUMBER)
 	private int gia;
+	
+//	@NotNull(message="Số lượng không được trống") 
+//	@NumberFormat(style = Style.NUMBER)
+//	@Pattern(regexp = "[\\s]*[0-9]*[1-9]+",message="Số lượng là một số")
 	private int soluongconlai;
 	
 	public SanPham() {

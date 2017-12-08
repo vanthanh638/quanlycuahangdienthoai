@@ -13,13 +13,15 @@
                             <div class="page-content">
                             	<form id="frmMobile" action="${pageContext.request.contextPath}/admin/mobile/add" method="post" enctype="multipart/form-data">
 	                            	
-	                            	<%-- <div class="row">
+	                            	<!-- validate -->
+	                            	<div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<form:errors path="objMobile.name_mobile" cssStyle="color:red"></form:errors>
+	                                    	<form:errors path="sanpham.tensanpham" cssStyle="color:red"></form:errors>
 	                                    </div>	
-	                                </div> --%>
+	                                </div>
+	                                <!--  -->
 	                            	<div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    	<p>Tên điện thoại</p>
@@ -51,13 +53,22 @@
 	                                    </div>	
 	                                </div>
 	                                
+	                                <!-- validate gia -->
+	                                <div class="row">
+	                                    <div class="col-lg-3 col-md-3 col-sm-3">
+	                                    </div>
+	                                    <div class="col-lg-9 col-md-9 col-sm-9">
+	                                    	<form:errors path="sanpham.gia" cssStyle="color:red"></form:errors>
+	                                    </div>	
+	                                </div>
+	                                <!--  -->
 	                                <div class="row">
 	                                    <div class="col-lg-3 col-md-3 col-sm-3">
 	                                    	<p>Giá</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<%-- <form:errors path="objMobile.gia" cssStyle="color:red"></form:errors> --%>
-	                                    	<input type="text" name="gia">
+	                                    	<%-- <form:errors path="sanpham.gia" cssStyle="color:red"></form:errors> --%>
+	                                    	<input type=text name="gia">
 	                                    </div>	
 	                                </div>
 	                                
@@ -66,7 +77,7 @@
 	                                    	<p>Số lượng</p>
 	                                    </div>
 	                                    <div class="col-lg-9 col-md-9 col-sm-9">
-	                                    	<%-- <form:errors path="objMobile.gia" cssStyle="color:red"></form:errors> --%>
+	                                    	<form:errors path="sanpham.soluongconlai" cssStyle="color:red"></form:errors>
 	                                    	<input type="text" name="soluongconlai">
 	                                    </div>	
 	                                </div>

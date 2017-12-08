@@ -6,8 +6,8 @@ function include(url){
 }
 
 
-include('twitter/jquery.tweet.js'); // Twitter widget */
-include('js/tinynav.min.js'); // Tiny nav
+include('templates/public/twitter/jquery.tweet.js'); // Twitter widget */
+include('templates/public/js/tinynav.min.js'); // Tiny nav
 
 
 

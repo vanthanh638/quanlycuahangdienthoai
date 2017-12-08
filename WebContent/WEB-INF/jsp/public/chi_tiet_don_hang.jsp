@@ -19,6 +19,7 @@
                     
                     <div class="row">
                         
+                        
                          <div class="col-lg-12 col-md-12 col-sm-12">
 							
 							
@@ -47,7 +48,16 @@
 														${obj.gia}
 													</td>
 													<td>
-														${obj.soluong}
+														<c:choose>
+															<c:when test="${donhang.trangthai == 0}">
+																<input width="50" type="text" name="so_luong" 
+																	value="${obj.soluong}" id="sl-${donhang.chiTietDonHangs.indexOf(obj)}" 
+																	onchange="checkSL(${obj.id}, ${obj.soluong})">
+															</c:when>
+															<c:otherwise>
+																${obj.soluong}
+															</c:otherwise>
+														</c:choose>
 													</td>
 													<td>
 														${obj.gia * obj.soluong}
@@ -61,6 +71,58 @@
 							
                         </div>
                         
+                        <c:choose>
+                        	<c:when test="${donhang.trangthai == 0}">
+                        		<div class="col-lg-3 col-md-3 col-sm-3">
+									<div class="add-green">
+										<a href="javascript: void(0)" onclick="return capNhat(${donhang.chiTietDonHangs.size()}, ${donhang.id})">
+											Cập nhật
+										</a>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-3">
+									<div class="add-green">
+										<a href="${pageContext.request.contextPath}/xoa-don-hang">
+											Xóa
+										</a>
+									</div>
+								</div>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<div class="col-lg-12 col-md-12 col-sm-12">
+		                        	<span style="color: red">Đơn hàng đã được xác nhận.</span>
+		                        </div>
+                        	</c:otherwise>
+                        </c:choose>
                     </div>
                     
 				</section>
+				
+<script type="text/javascript">
+	function capNhat(total, id) {
+		var array_sl = [];
+		for (var i = 0; i< total; i++){
+			array_sl[i] = $("#sl-" + i).val();
+			alert(array_sl[i])
+		}
+		console.log(array_sl);
+		
+		window.location="${pageContext.request.contextPath}/cap-nhat-don-hang/"+id + "/"+array_sl;
+	}
+	function checkSL(id, sl) {
+		var soluong;
+		soluong = $('#sl-'+id).val();
+		/* var gia =  $('#gia-'+id).val();
+		var tong = gia * soluong;
+		$('#tong-'+id).text(tong); */
+		var re = /^\d+$/;
+		if(soluong == ''){
+			alert("Số lượng không được bỏ trống");
+			$('#sl-'+id).val(sl);
+		}else if((!re.test(soluong)) || soluong == 0){
+			alert("Số lượng phải là số nguyên và lớn hơn không");
+			$('#sl-'+id).val(sl);
+		}
+		
+	}
+</script>

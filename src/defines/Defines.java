@@ -4,7 +4,7 @@ public class Defines {
 	private String publicUrl;
 	private String adminUrl;
 	public final static int row_count = 10;
-	public final static String url = "http://192.168.1.6:8082/";
+	public final static String url = "http://localhost:8082/";
 
 	public Defines() {
 		super();
